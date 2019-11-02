@@ -44,15 +44,6 @@ set_global_assignment -name LAST_QUARTUS_VERSION "19.1.0 Lite Edition"
 set_global_assignment -name NUM_PARALLEL_PROCESSORS ALL
 set_global_assignment -name PROJECT_OUTPUT_DIRECTORY output_files
 set_global_assignment -name TOP_LEVEL_ENTITY top
-set_global_assignment -name VHDL_FILE src/single_port_rom.vhd
-set_global_assignment -name VHDL_FILE src/top.vhd
-set_global_assignment -name SDC_FILE src/top.sdc
-set_global_assignment -name VHDL_FILE src/t80/T80s.vhd
-set_global_assignment -name VHDL_FILE src/t80/T80_Reg.vhd
-set_global_assignment -name VHDL_FILE src/t80/T80_Pack.vhd
-set_global_assignment -name VHDL_FILE src/t80/T80_MCode.vhd
-set_global_assignment -name VHDL_FILE src/t80/T80_ALU.vhd
-set_global_assignment -name VHDL_FILE src/t80/T80.vhd
 
 set_global_assignment -name MIN_CORE_JUNCTION_TEMP "-40"
 set_global_assignment -name MAX_CORE_JUNCTION_TEMP 100
@@ -61,14 +52,6 @@ set_global_assignment -name ERROR_CHECK_FREQUENCY_DIVISOR 256
 set_location_assignment PIN_V11 -to clk
 set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to clk
 
-set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to led[0]
-set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to led[1]
-set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to led[2]
-set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to led[3]
-set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to led[4]
-set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to led[5]
-set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to led[6]
-set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to led[7]
 set_location_assignment PIN_W15 -to led[0]
 set_location_assignment PIN_AA24 -to led[1]
 set_location_assignment PIN_V16 -to led[2]
@@ -77,8 +60,32 @@ set_location_assignment PIN_AF26 -to led[4]
 set_location_assignment PIN_AE26 -to led[5]
 set_location_assignment PIN_Y16 -to led[6]
 set_location_assignment PIN_AA23 -to led[7]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to led[0]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to led[1]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to led[2]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to led[3]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to led[4]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to led[5]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to led[6]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to led[7]
 
-set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to key[0]
-set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to key[1]
+set_location_assignment PIN_AC24 -to audio
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to audio
+set_instance_assignment -name CURRENT_STRENGTH_NEW 8MA -to audio
+
 set_location_assignment PIN_AH17 -to key[0]
 set_location_assignment PIN_AH16 -to key[1]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to key[0]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to key[1]
+
+set_global_assignment -name VHDL_FILE src/clock_divider.vhd
+set_global_assignment -name VHDL_FILE src/common.vhd
+set_global_assignment -name VHDL_FILE src/single_port_ram.vhd
+set_global_assignment -name VHDL_FILE src/single_port_rom.vhd
+set_global_assignment -name VHDL_FILE src/sigma_delta_dac.vhd
+set_global_assignment -name VHDL_FILE src/sound.vhd
+set_global_assignment -name VHDL_FILE src/top.vhd
+set_global_assignment -name QIP_FILE src/opl3.qip
+set_global_assignment -name QIP_FILE src/pll.qip
+set_global_assignment -name QIP_FILE src/t80.qip
+set_global_assignment -name SDC_FILE src/top.sdc
