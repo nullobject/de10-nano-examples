@@ -29,9 +29,12 @@ use work.common.all;
 entity top is
   port (
     clk : in std_logic;
+
     key : in std_logic_vector(1 downto 0);
     led : out std_logic_vector(7 downto 0);
-    audio : out std_logic
+
+    audio_l : out std_logic;
+    audio_r : out std_logic
   );
 end top;
 
@@ -45,6 +48,8 @@ architecture arch of top is
   signal snd_req    : std_logic;
   signal snd_data   : byte_t;
   signal snd_sample : signed(15 downto 0);
+
+  signal audio : std_logic;
 begin
   -- generate the clock signals
   my_pll : entity pll.pll
@@ -98,4 +103,7 @@ begin
   );
 
   snd_data <= x"34";
+
+  audio_l <= audio;
+  audio_r <= audio;
 end arch;
