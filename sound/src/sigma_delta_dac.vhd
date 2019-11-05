@@ -9,9 +9,14 @@ entity sigma_delta_dac is
 
   port (
     reset : in std_logic;
-    clk   : in std_logic;
-    data  : in signed(WIDTH-1 downto 0);
-    q     : out std_logic
+
+    clk : in std_logic;
+
+    -- input data
+    data : in signed(WIDTH-1 downto 0);
+
+    -- output data
+    q : out std_logic
   );
 end sigma_delta_dac;
 

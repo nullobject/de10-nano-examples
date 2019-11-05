@@ -33,10 +33,11 @@ entity sound is
     cen : in std_logic;
 
     -- request
-    req : in byte_t;
+    req  : in std_logic;
+    data : in byte_t;
 
-    -- output data
-    q : out signed(15 downto 0)
+    -- sample data
+    sample : out signed(15 downto 0)
   );
 end entity sound;
 
@@ -50,20 +51,25 @@ architecture arch of sound is
   signal cpu_rd_n   : std_logic;
   signal cpu_wr_n   : std_logic;
   signal cpu_rfsh_n : std_logic;
-  signal cpu_int_n  : std_logic := '1';
   signal cpu_nmi_n  : std_logic := '1';
+  signal cpu_int_n  : std_logic := '1';
 
   -- chip select signals
   signal sound_rom_cs : std_logic;
   signal sound_ram_cs : std_logic;
   signal opl_cs       : std_logic;
   signal req_cs       : std_logic;
+  signal vol_cs       : std_logic;
+  signal req_off_cs   : std_logic;
 
-  -- data output signals
-  signal sound_rom_dout : byte_t;
+  -- data signals
+  signal sound_rom_data : byte_t;
   signal sound_ram_dout : byte_t;
-  signal req_dout       : byte_t;
-  signal opl_dout       : byte_t;
+  signal opl_data       : byte_t;
+  signal req_data       : byte_t;
+
+  -- registers
+  signal data_reg : byte_t;
 begin
   cpu : entity work.T80s
   port map (
@@ -103,25 +109,36 @@ begin
     cs   => sound_ram_cs,
     addr => cpu_addr(SOUND_RAM_ADDR_WIDTH-1 downto 0),
     din  => cpu_dout,
-    dout => sound_ram_dout,
-    we   => not cpu_mreq_n and not cpu_wr_n
+    dout => sound_ram_data,
+    we   => not cpu_wr_n
   );
 
   opl : entity work.opl
   port map (
-    reset => reset,
-
-    clk => clk,
-
-    irq_n => cpu_int_n,
-
-    addr => ('1' & cpu_addr(0)),
-    din  => cpu_din,
-    dout => opl_dout,
-    we   => opl_cs and not cpu_mreq_n and not cpu_wr_n,
-
-    sample => q
+    reset  => reset,
+    clk    => clk,
+    irq_n  => cpu_int_n,
+    cs     => opl_cs,
+    addr   => ('1' & cpu_addr(0)),
+    din    => cpu_din,
+    dout   => opl_data,
+    we     => not cpu_wr_n,
+    sample => sample
   );
+
+  nmi : process (clk, reset)
+  begin
+    if reset = '1' then
+      cpu_nmi_n <= '1';
+    elsif rising_edge(clk) then
+      if req = '1' then
+        cpu_nmi_n <= '0';
+        data_reg <= data;
+      elsif req_off_cs = '1' and cpu_wr_n = '0' then
+        cpu_nmi_n <= '1';
+      end if;
+    end if;
+  end process;
 
   --  address    description
   -- ----------+-----------------
@@ -129,16 +146,23 @@ begin
   -- 4000-7fff | sound RAM
   -- 8000-bfff | OPL
   -- c000-ffff | request
-  sound_rom_cs <= '1' when cpu_addr >= x"0000" and cpu_addr <= x"3fff" else '0';
-  sound_ram_cs <= '1' when cpu_addr >= x"4000" and cpu_addr <= x"7fff" else '0';
-  opl_cs       <= '1' when cpu_addr >= x"8000" and cpu_addr <= x"bfff" else '0';
-  req_cs       <= '1' when cpu_addr >= x"c000" and cpu_addr <= x"ffff" else '0';
+  -- c000-cfff | ?
+  -- d000-dfff | ?
+  -- e000-efff | volume
+  -- f000-ffff | request off
+  sound_rom_cs <= '1' when cpu_addr >= x"0000" and cpu_addr <= x"3fff" and cpu_mreq_n = '0' and cpu_rfsh_n = '1' else '0';
+  sound_ram_cs <= '1' when cpu_addr >= x"4000" and cpu_addr <= x"7fff" and cpu_mreq_n = '0' and cpu_rfsh_n = '1' else '0';
+  opl_cs       <= '1' when cpu_addr >= x"8000" and cpu_addr <= x"bfff" and cpu_mreq_n = '0' and cpu_rfsh_n = '1' else '0';
+  req_cs       <= '1' when cpu_addr >= x"c000" and cpu_addr <= x"ffff" and cpu_mreq_n = '0' and cpu_rfsh_n = '1' else '0';
+  vol_cs       <= '1' when cpu_addr >= x"e000" and cpu_addr <= x"efff" and cpu_mreq_n = '0' and cpu_rfsh_n = '1' else '0';
+  req_off_cs   <= '1' when cpu_addr >= x"f000" and cpu_addr <= x"ffff" and cpu_mreq_n = '0' and cpu_rfsh_n = '1' else '0';
 
-  -- mux request
-  req_dout <= req when req_cs = '1' and cpu_rd_n = '0' else (others => '0');
+  -- set request data
+  req_data <= data_reg when req_cs = '1' and cpu_rd_n = '0' else (others => '0');
 
   -- mux CPU data input
-  cpu_din <= sound_rom_dout or
-             sound_ram_dout or
-             req_dout;
+  cpu_din <= sound_rom_data or
+             sound_ram_data or
+             opl_data or
+             req_data;
 end architecture arch;

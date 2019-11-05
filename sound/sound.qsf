@@ -80,6 +80,7 @@ set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to key[1]
 
 set_global_assignment -name VHDL_FILE src/clock_divider.vhd
 set_global_assignment -name VHDL_FILE src/common.vhd
+set_global_assignment -name VHDL_FILE src/reset_gen.vhd
 set_global_assignment -name VHDL_FILE src/single_port_ram.vhd
 set_global_assignment -name VHDL_FILE src/single_port_rom.vhd
 set_global_assignment -name VHDL_FILE src/sigma_delta_dac.vhd

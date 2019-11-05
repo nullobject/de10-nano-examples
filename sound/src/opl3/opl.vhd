@@ -28,6 +28,7 @@ entity opl is
     clk   : in std_logic;
     irq_n : out std_logic;
 
+    cs   : in std_logic;
     addr : in std_logic_vector(1 downto 0);
     dout : out std_logic_vector(7 downto 0);
     din  : in std_logic_vector(7 downto 0);
@@ -38,6 +39,8 @@ entity opl is
 end entity opl;
 
 architecture arch of opl is
+  signal opl3_dout : std_logic_vector(7 downto 0);
+
   component opl3 is
     port (
       clk     : in std_logic;
@@ -65,14 +68,17 @@ begin
     clk_opl => clk,
 
     irq_n => irq_n,
-    period_80us => (others => '0'),
+
+    period_80us => std_logic_vector(to_unsigned(2560, 13)),
 
     addr => addr,
     din  => din,
-    dout => dout,
-    we   => we,
+    dout => opl3_dout,
+    we   => cs and we,
 
     sample_l => sample,
     sample_r => open
   );
+
+  dout <= opl3_dout when cs = '1' else (others => '0');
 end architecture arch;

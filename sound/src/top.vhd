@@ -36,15 +36,15 @@ entity top is
 end top;
 
 architecture arch of top is
+  signal reset : std_logic;
+
   -- clock signals
   signal sys_clk : std_logic;
   signal cen_4   : std_logic;
-  signal reset   : std_logic;
 
-  signal snd_req  : byte_t;
-  signal snd_data : signed(15 downto 0);
-
-  signal cen_1000 : std_logic;
+  signal snd_req    : std_logic;
+  signal snd_data   : byte_t;
+  signal snd_sample : signed(15 downto 0);
 begin
   -- generate the clock signals
   my_pll : entity pll.pll
@@ -61,42 +61,41 @@ begin
   generic map (DIVISOR => 12)
   port map (clk => sys_clk, cen => cen_4);
 
-  clock_divider_1000 : entity work.clock_divider
-  generic map (DIVISOR => 48000)
-  port map (clk => sys_clk, cen => cen_1000);
+  -- generate a reset pulse after powering on, or when KEY0 is pressed
+  reset_gen : entity work.reset_gen
+  port map (
+    clk  => sys_clk,
+    rin  => not key(0),
+    rout => reset
+  );
 
   sound : entity work.sound
   port map (
-    reset => reset,
-    clk   => sys_clk,
-    cen   => cen_4,
-    req   => snd_req,
-    q     => open
+    reset  => reset,
+    clk    => sys_clk,
+    cen    => cen_4,
+    req    => snd_req,
+    data   => snd_data,
+    sample => snd_sample
   );
 
+  -- converts audio samples to an analog signal
   dac : entity work.sigma_delta_dac
   generic map (WIDTH => 16)
   port map (
     reset => reset,
     clk   => sys_clk,
-    data  => snd_data,
+    data  => snd_sample,
     q     => audio
   );
 
-  process (clk)
+  process (clk, reset)
   begin
-    if rising_edge(clk) then
-      if cen_1000 = '1' then
-        if snd_data = "1111111111111111" then
-          snd_data <= "0111111111111111";
-        else
-          snd_data <= "1111111111111111";
-        end if;
-      end if;
+    if reset = '1' then
+      snd_req <= '1';
+      snd_data <= x"34";
+     elsif rising_edge(clk) then
+      snd_req <= '0';
     end if;
   end process;
-
-  snd_req <= "00100000";
-
-  reset <= not key(0);
 end arch;
