@@ -43,6 +43,9 @@ architecture arch of opl is
   signal opl3_dout : std_logic_vector(7 downto 0);
 
   component opl3 is
+    generic (
+      OPLCLK : natural := 48000000
+    );
     port (
       clk     : in std_logic;
       clk_opl : in std_logic;

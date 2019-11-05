@@ -59,7 +59,6 @@ architecture arch of sound is
   signal sound_ram_cs : std_logic;
   signal opl_cs       : std_logic;
   signal req_cs       : std_logic;
-  signal vol_cs       : std_logic;
   signal req_off_cs   : std_logic;
 
   -- data signals
@@ -119,7 +118,7 @@ begin
     clk    => clk,
     irq_n  => cpu_int_n,
     cs     => opl_cs,
-    addr   => ('1' & cpu_addr(0)),
+    addr   => ('0' & cpu_addr(0)),
     din    => cpu_dout,
     dout   => opl_data,
     we     => not cpu_wr_n,
@@ -158,7 +157,6 @@ begin
   sound_ram_cs <= '1' when cpu_addr >= x"4000" and cpu_addr <= x"7fff" and cpu_mreq_n = '0' and cpu_rfsh_n = '1' else '0';
   opl_cs       <= '1' when cpu_addr >= x"8000" and cpu_addr <= x"bfff" and cpu_mreq_n = '0' and cpu_rfsh_n = '1' else '0';
   req_cs       <= '1' when cpu_addr >= x"c000" and cpu_addr <= x"ffff" and cpu_mreq_n = '0' and cpu_rfsh_n = '1' else '0';
-  vol_cs       <= '1' when cpu_addr >= x"e000" and cpu_addr <= x"efff" and cpu_mreq_n = '0' and cpu_rfsh_n = '1' else '0';
   req_off_cs   <= '1' when cpu_addr >= x"f000" and cpu_addr <= x"ffff" and cpu_mreq_n = '0' and cpu_rfsh_n = '1' else '0';
 
   -- set request data
