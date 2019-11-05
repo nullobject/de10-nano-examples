@@ -41,9 +41,10 @@ end top;
 architecture arch of top is
   signal reset : std_logic;
 
-  -- clock signals
   signal sys_clk : std_logic;
   signal cen_4   : std_logic;
+
+  signal req : std_logic;
 
   signal snd_req    : std_logic;
   signal snd_data   : byte_t;
@@ -79,7 +80,16 @@ begin
   port map (
     clk  => sys_clk,
     rin  => not key(1),
-    rout => snd_req
+    rout => req
+  );
+
+  -- detect rising edges of the req signal
+  req_edge_detector : entity work.edge_detector
+  generic map (RISING => true)
+  port map (
+    clk  => clk,
+    data => req,
+    edge => snd_req
   );
 
   sound : entity work.sound
