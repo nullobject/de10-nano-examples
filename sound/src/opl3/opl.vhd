@@ -26,6 +26,7 @@ entity opl is
   port (
     reset : in std_logic;
     clk   : in std_logic;
+
     irq_n : out std_logic;
 
     cs   : in std_logic;

@@ -64,7 +64,7 @@ architecture arch of sound is
 
   -- data signals
   signal sound_rom_data : byte_t;
-  signal sound_ram_dout : byte_t;
+  signal sound_ram_data : byte_t;
   signal opl_data       : byte_t;
   signal req_data       : byte_t;
 
@@ -99,7 +99,7 @@ begin
     clk  => clk,
     cs   => sound_rom_cs,
     addr => cpu_addr(SOUND_ROM_1_ADDR_WIDTH-1 downto 0),
-    dout => sound_rom_dout
+    dout => sound_rom_data
   );
 
   sound_ram : entity work.single_port_ram
@@ -120,7 +120,7 @@ begin
     irq_n  => cpu_int_n,
     cs     => opl_cs,
     addr   => ('1' & cpu_addr(0)),
-    din    => cpu_din,
+    din    => cpu_dout,
     dout   => opl_data,
     we     => not cpu_wr_n,
     sample => sample
@@ -131,11 +131,15 @@ begin
     if reset = '1' then
       cpu_nmi_n <= '1';
     elsif rising_edge(clk) then
-      if req = '1' then
-        cpu_nmi_n <= '0';
-        data_reg <= data;
-      elsif req_off_cs = '1' and cpu_wr_n = '0' then
+      if req_off_cs = '1' and cpu_wr_n = '0' then
+        -- clear NMI
         cpu_nmi_n <= '1';
+      elsif req = '1' then
+        -- set NMI
+        cpu_nmi_n <= '0';
+
+        -- latch data
+        data_reg <= data;
       end if;
     end if;
   end process;

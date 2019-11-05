@@ -1,0 +1,533 @@
+<session jtag_chain="DE-SoC [1-8]" jtag_device="@2: 5CSEBA6(.|ES)/5CSEMA6/.. (0x02D020DD)" sof_file="output_files/sound.sof">
+  <display_tree gui_logging_enabled="0">
+    <display_branch instance="auto_signaltap_0" signal_set="USE_GLOBAL_TEMP" trigger="USE_GLOBAL_TEMP"/>
+  </display_tree>
+  <global_info>
+    <multi attribute="column width" size="23" value="34,34,220,74,68,78,95,96,98,98,88,88,138,101,101,101,101,101,101,101,101,107,78"/>
+    <single attribute="active instance" value="0"/>
+    <single attribute="lock mode" value="0"/>
+    <multi attribute="frame size" size="2" value="1680,1008"/>
+    <single attribute="jtag widget visible" value="1"/>
+    <multi attribute="jtag widget size" size="2" value="349,145"/>
+    <single attribute="instance widget visible" value="1"/>
+    <single attribute="config widget visible" value="1"/>
+    <single attribute="hierarchy widget visible" value="1"/>
+    <single attribute="data log widget visible" value="1"/>
+    <single attribute="sof manager visible" value="0"/>
+  </global_info>
+  <instance enabled="true" entity_name="sld_signaltap" is_auto_node="yes" name="auto_signaltap_0" source_file="sld_signaltap.vhd">
+    <node_ip_info instance_id="0" mfg_id="110" node_id="0" version="6"/>
+    <position_info>
+      <single attribute="active tab" value="1"/>
+      <single attribute="setup vertical scroll position" value="0"/>
+      <single attribute="setup horizontal scroll position" value="0"/>
+      <single attribute="data vertical scroll position" value="2"/>
+      <single attribute="data horizontal scroll position" value="0"/>
+      <single attribute="zoom level numerator" value="1"/>
+      <single attribute="zoom level denominator" value="4"/>
+      <single attribute="zoom offset numerator" value="523264"/>
+      <single attribute="zoom offset denominator" value="1"/>
+    </position_info>
+    <signal_set global_temp="1" name="signal_set: 2019/11/05 15:48:29  #0">
+      <clock name="pll:my_pll|outclk_0" polarity="posedge" tap_mode="classic"/>
+      <config pipeline_level="0" ram_type="AUTO" reserved_data_nodes="0" reserved_storage_qualifier_nodes="0" reserved_trigger_nodes="0" sample_depth="1024" trigger_in_enable="no" trigger_out_enable="no"/>
+      <top_entity/>
+      <signal_vec>
+        <trigger_input_vec>
+          <wire name="sound:sound|T80s:cpu|INT_n" tap_mode="classic"/>
+          <wire name="sound:sound|T80s:cpu|MREQ_n" tap_mode="classic"/>
+          <wire name="sound:sound|T80s:cpu|NMI_n" tap_mode="classic"/>
+          <wire name="sound:sound|T80s:cpu|RD_n" tap_mode="classic"/>
+          <wire name="sound:sound|T80s:cpu|RFSH_n" tap_mode="classic"/>
+          <wire name="sound:sound|T80s:cpu|WR_n" tap_mode="classic"/>
+          <wire name="sound:sound|opl:opl|cs" tap_mode="classic"/>
+          <wire name="sound:sound|opl:opl|we" tap_mode="classic"/>
+          <wire name="sound:sound|opl_cs" tap_mode="classic"/>
+          <wire name="sound:sound|req" tap_mode="classic"/>
+          <wire name="sound:sound|req_cs" tap_mode="classic"/>
+          <wire name="sound:sound|req_off_cs" tap_mode="classic"/>
+          <wire name="sound:sound|reset" tap_mode="classic"/>
+          <wire name="sound:sound|sound_ram_cs" tap_mode="classic"/>
+          <wire name="sound:sound|sound_rom_cs" tap_mode="classic"/>
+        </trigger_input_vec>
+        <data_input_vec>
+          <wire name="sound:sound|T80s:cpu|A[0]" tap_mode="classic"/>
+          <wire name="sound:sound|T80s:cpu|A[10]" tap_mode="classic"/>
+          <wire name="sound:sound|T80s:cpu|A[11]" tap_mode="classic"/>
+          <wire name="sound:sound|T80s:cpu|A[12]" tap_mode="classic"/>
+          <wire name="sound:sound|T80s:cpu|A[13]" tap_mode="classic"/>
+          <wire name="sound:sound|T80s:cpu|A[14]" tap_mode="classic"/>
+          <wire name="sound:sound|T80s:cpu|A[15]" tap_mode="classic"/>
+          <wire name="sound:sound|T80s:cpu|A[1]" tap_mode="classic"/>
+          <wire name="sound:sound|T80s:cpu|A[2]" tap_mode="classic"/>
+          <wire name="sound:sound|T80s:cpu|A[3]" tap_mode="classic"/>
+          <wire name="sound:sound|T80s:cpu|A[4]" tap_mode="classic"/>
+          <wire name="sound:sound|T80s:cpu|A[5]" tap_mode="classic"/>
+          <wire name="sound:sound|T80s:cpu|A[6]" tap_mode="classic"/>
+          <wire name="sound:sound|T80s:cpu|A[7]" tap_mode="classic"/>
+          <wire name="sound:sound|T80s:cpu|A[8]" tap_mode="classic"/>
+          <wire name="sound:sound|T80s:cpu|A[9]" tap_mode="classic"/>
+          <wire name="sound:sound|T80s:cpu|DI[0]" tap_mode="classic"/>
+          <wire name="sound:sound|T80s:cpu|DI[1]" tap_mode="classic"/>
+          <wire name="sound:sound|T80s:cpu|DI[2]" tap_mode="classic"/>
+          <wire name="sound:sound|T80s:cpu|DI[3]" tap_mode="classic"/>
+          <wire name="sound:sound|T80s:cpu|DI[4]" tap_mode="classic"/>
+          <wire name="sound:sound|T80s:cpu|DI[5]" tap_mode="classic"/>
+          <wire name="sound:sound|T80s:cpu|DI[6]" tap_mode="classic"/>
+          <wire name="sound:sound|T80s:cpu|DI[7]" tap_mode="classic"/>
+          <wire name="sound:sound|T80s:cpu|DO[0]" tap_mode="classic"/>
+          <wire name="sound:sound|T80s:cpu|DO[1]" tap_mode="classic"/>
+          <wire name="sound:sound|T80s:cpu|DO[2]" tap_mode="classic"/>
+          <wire name="sound:sound|T80s:cpu|DO[3]" tap_mode="classic"/>
+          <wire name="sound:sound|T80s:cpu|DO[4]" tap_mode="classic"/>
+          <wire name="sound:sound|T80s:cpu|DO[5]" tap_mode="classic"/>
+          <wire name="sound:sound|T80s:cpu|DO[6]" tap_mode="classic"/>
+          <wire name="sound:sound|T80s:cpu|DO[7]" tap_mode="classic"/>
+          <wire name="sound:sound|T80s:cpu|INT_n" tap_mode="classic"/>
+          <wire name="sound:sound|T80s:cpu|MREQ_n" tap_mode="classic"/>
+          <wire name="sound:sound|T80s:cpu|NMI_n" tap_mode="classic"/>
+          <wire name="sound:sound|T80s:cpu|RD_n" tap_mode="classic"/>
+          <wire name="sound:sound|T80s:cpu|RFSH_n" tap_mode="classic"/>
+          <wire name="sound:sound|T80s:cpu|WR_n" tap_mode="classic"/>
+          <wire name="sound:sound|opl:opl|addr[0]" tap_mode="classic"/>
+          <wire name="sound:sound|opl:opl|addr[1]" tap_mode="classic"/>
+          <wire name="sound:sound|opl:opl|cs" tap_mode="classic"/>
+          <wire name="sound:sound|opl:opl|din[0]" tap_mode="classic"/>
+          <wire name="sound:sound|opl:opl|din[1]" tap_mode="classic"/>
+          <wire name="sound:sound|opl:opl|din[2]" tap_mode="classic"/>
+          <wire name="sound:sound|opl:opl|din[3]" tap_mode="classic"/>
+          <wire name="sound:sound|opl:opl|din[4]" tap_mode="classic"/>
+          <wire name="sound:sound|opl:opl|din[5]" tap_mode="classic"/>
+          <wire name="sound:sound|opl:opl|din[6]" tap_mode="classic"/>
+          <wire name="sound:sound|opl:opl|din[7]" tap_mode="classic"/>
+          <wire name="sound:sound|opl:opl|dout[0]" tap_mode="classic"/>
+          <wire name="sound:sound|opl:opl|dout[1]" tap_mode="classic"/>
+          <wire name="sound:sound|opl:opl|dout[2]" tap_mode="classic"/>
+          <wire name="sound:sound|opl:opl|dout[3]" tap_mode="classic"/>
+          <wire name="sound:sound|opl:opl|dout[4]" tap_mode="classic"/>
+          <wire name="sound:sound|opl:opl|dout[5]" tap_mode="classic"/>
+          <wire name="sound:sound|opl:opl|dout[6]" tap_mode="classic"/>
+          <wire name="sound:sound|opl:opl|dout[7]" tap_mode="classic"/>
+          <wire name="sound:sound|opl:opl|sample[0]" tap_mode="classic"/>
+          <wire name="sound:sound|opl:opl|sample[10]" tap_mode="classic"/>
+          <wire name="sound:sound|opl:opl|sample[11]" tap_mode="classic"/>
+          <wire name="sound:sound|opl:opl|sample[12]" tap_mode="classic"/>
+          <wire name="sound:sound|opl:opl|sample[13]" tap_mode="classic"/>
+          <wire name="sound:sound|opl:opl|sample[14]" tap_mode="classic"/>
+          <wire name="sound:sound|opl:opl|sample[15]" tap_mode="classic"/>
+          <wire name="sound:sound|opl:opl|sample[1]" tap_mode="classic"/>
+          <wire name="sound:sound|opl:opl|sample[2]" tap_mode="classic"/>
+          <wire name="sound:sound|opl:opl|sample[3]" tap_mode="classic"/>
+          <wire name="sound:sound|opl:opl|sample[4]" tap_mode="classic"/>
+          <wire name="sound:sound|opl:opl|sample[5]" tap_mode="classic"/>
+          <wire name="sound:sound|opl:opl|sample[6]" tap_mode="classic"/>
+          <wire name="sound:sound|opl:opl|sample[7]" tap_mode="classic"/>
+          <wire name="sound:sound|opl:opl|sample[8]" tap_mode="classic"/>
+          <wire name="sound:sound|opl:opl|sample[9]" tap_mode="classic"/>
+          <wire name="sound:sound|opl:opl|we" tap_mode="classic"/>
+          <wire name="sound:sound|opl_cs" tap_mode="classic"/>
+          <wire name="sound:sound|req" tap_mode="classic"/>
+          <wire name="sound:sound|req_cs" tap_mode="classic"/>
+          <wire name="sound:sound|req_off_cs" tap_mode="classic"/>
+          <wire name="sound:sound|reset" tap_mode="classic"/>
+          <wire name="sound:sound|sound_ram_cs" tap_mode="classic"/>
+          <wire name="sound:sound|sound_rom_cs" tap_mode="classic"/>
+        </data_input_vec>
+        <storage_qualifier_input_vec>
+          <wire name="sound:sound|T80s:cpu|A[0]" tap_mode="classic"/>
+          <wire name="sound:sound|T80s:cpu|A[10]" tap_mode="classic"/>
+          <wire name="sound:sound|T80s:cpu|A[11]" tap_mode="classic"/>
+          <wire name="sound:sound|T80s:cpu|A[12]" tap_mode="classic"/>
+          <wire name="sound:sound|T80s:cpu|A[13]" tap_mode="classic"/>
+          <wire name="sound:sound|T80s:cpu|A[14]" tap_mode="classic"/>
+          <wire name="sound:sound|T80s:cpu|A[15]" tap_mode="classic"/>
+          <wire name="sound:sound|T80s:cpu|A[1]" tap_mode="classic"/>
+          <wire name="sound:sound|T80s:cpu|A[2]" tap_mode="classic"/>
+          <wire name="sound:sound|T80s:cpu|A[3]" tap_mode="classic"/>
+          <wire name="sound:sound|T80s:cpu|A[4]" tap_mode="classic"/>
+          <wire name="sound:sound|T80s:cpu|A[5]" tap_mode="classic"/>
+          <wire name="sound:sound|T80s:cpu|A[6]" tap_mode="classic"/>
+          <wire name="sound:sound|T80s:cpu|A[7]" tap_mode="classic"/>
+          <wire name="sound:sound|T80s:cpu|A[8]" tap_mode="classic"/>
+          <wire name="sound:sound|T80s:cpu|A[9]" tap_mode="classic"/>
+          <wire name="sound:sound|T80s:cpu|DI[0]" tap_mode="classic"/>
+          <wire name="sound:sound|T80s:cpu|DI[1]" tap_mode="classic"/>
+          <wire name="sound:sound|T80s:cpu|DI[2]" tap_mode="classic"/>
+          <wire name="sound:sound|T80s:cpu|DI[3]" tap_mode="classic"/>
+          <wire name="sound:sound|T80s:cpu|DI[4]" tap_mode="classic"/>
+          <wire name="sound:sound|T80s:cpu|DI[5]" tap_mode="classic"/>
+          <wire name="sound:sound|T80s:cpu|DI[6]" tap_mode="classic"/>
+          <wire name="sound:sound|T80s:cpu|DI[7]" tap_mode="classic"/>
+          <wire name="sound:sound|T80s:cpu|DO[0]" tap_mode="classic"/>
+          <wire name="sound:sound|T80s:cpu|DO[1]" tap_mode="classic"/>
+          <wire name="sound:sound|T80s:cpu|DO[2]" tap_mode="classic"/>
+          <wire name="sound:sound|T80s:cpu|DO[3]" tap_mode="classic"/>
+          <wire name="sound:sound|T80s:cpu|DO[4]" tap_mode="classic"/>
+          <wire name="sound:sound|T80s:cpu|DO[5]" tap_mode="classic"/>
+          <wire name="sound:sound|T80s:cpu|DO[6]" tap_mode="classic"/>
+          <wire name="sound:sound|T80s:cpu|DO[7]" tap_mode="classic"/>
+          <wire name="sound:sound|T80s:cpu|INT_n" tap_mode="classic"/>
+          <wire name="sound:sound|T80s:cpu|MREQ_n" tap_mode="classic"/>
+          <wire name="sound:sound|T80s:cpu|NMI_n" tap_mode="classic"/>
+          <wire name="sound:sound|T80s:cpu|RD_n" tap_mode="classic"/>
+          <wire name="sound:sound|T80s:cpu|RFSH_n" tap_mode="classic"/>
+          <wire name="sound:sound|T80s:cpu|WR_n" tap_mode="classic"/>
+          <wire name="sound:sound|opl:opl|addr[0]" tap_mode="classic"/>
+          <wire name="sound:sound|opl:opl|addr[1]" tap_mode="classic"/>
+          <wire name="sound:sound|opl:opl|cs" tap_mode="classic"/>
+          <wire name="sound:sound|opl:opl|din[0]" tap_mode="classic"/>
+          <wire name="sound:sound|opl:opl|din[1]" tap_mode="classic"/>
+          <wire name="sound:sound|opl:opl|din[2]" tap_mode="classic"/>
+          <wire name="sound:sound|opl:opl|din[3]" tap_mode="classic"/>
+          <wire name="sound:sound|opl:opl|din[4]" tap_mode="classic"/>
+          <wire name="sound:sound|opl:opl|din[5]" tap_mode="classic"/>
+          <wire name="sound:sound|opl:opl|din[6]" tap_mode="classic"/>
+          <wire name="sound:sound|opl:opl|din[7]" tap_mode="classic"/>
+          <wire name="sound:sound|opl:opl|dout[0]" tap_mode="classic"/>
+          <wire name="sound:sound|opl:opl|dout[1]" tap_mode="classic"/>
+          <wire name="sound:sound|opl:opl|dout[2]" tap_mode="classic"/>
+          <wire name="sound:sound|opl:opl|dout[3]" tap_mode="classic"/>
+          <wire name="sound:sound|opl:opl|dout[4]" tap_mode="classic"/>
+          <wire name="sound:sound|opl:opl|dout[5]" tap_mode="classic"/>
+          <wire name="sound:sound|opl:opl|dout[6]" tap_mode="classic"/>
+          <wire name="sound:sound|opl:opl|dout[7]" tap_mode="classic"/>
+          <wire name="sound:sound|opl:opl|sample[0]" tap_mode="classic"/>
+          <wire name="sound:sound|opl:opl|sample[10]" tap_mode="classic"/>
+          <wire name="sound:sound|opl:opl|sample[11]" tap_mode="classic"/>
+          <wire name="sound:sound|opl:opl|sample[12]" tap_mode="classic"/>
+          <wire name="sound:sound|opl:opl|sample[13]" tap_mode="classic"/>
+          <wire name="sound:sound|opl:opl|sample[14]" tap_mode="classic"/>
+          <wire name="sound:sound|opl:opl|sample[15]" tap_mode="classic"/>
+          <wire name="sound:sound|opl:opl|sample[1]" tap_mode="classic"/>
+          <wire name="sound:sound|opl:opl|sample[2]" tap_mode="classic"/>
+          <wire name="sound:sound|opl:opl|sample[3]" tap_mode="classic"/>
+          <wire name="sound:sound|opl:opl|sample[4]" tap_mode="classic"/>
+          <wire name="sound:sound|opl:opl|sample[5]" tap_mode="classic"/>
+          <wire name="sound:sound|opl:opl|sample[6]" tap_mode="classic"/>
+          <wire name="sound:sound|opl:opl|sample[7]" tap_mode="classic"/>
+          <wire name="sound:sound|opl:opl|sample[8]" tap_mode="classic"/>
+          <wire name="sound:sound|opl:opl|sample[9]" tap_mode="classic"/>
+          <wire name="sound:sound|opl:opl|we" tap_mode="classic"/>
+          <wire name="sound:sound|opl_cs" tap_mode="classic"/>
+          <wire name="sound:sound|req" tap_mode="classic"/>
+          <wire name="sound:sound|req_cs" tap_mode="classic"/>
+          <wire name="sound:sound|req_off_cs" tap_mode="classic"/>
+          <wire name="sound:sound|reset" tap_mode="classic"/>
+          <wire name="sound:sound|sound_ram_cs" tap_mode="classic"/>
+          <wire name="sound:sound|sound_rom_cs" tap_mode="classic"/>
+        </storage_qualifier_input_vec>
+      </signal_vec>
+      <presentation>
+        <unified_setup_data_view>
+          <node data_index="76" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" level-0="dont_care" name="sound:sound|reset" storage_index="76" tap_mode="classic" trigger_index="10" type="unknown"/>
+          <node data_index="73" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" level-0="dont_care" name="sound:sound|req" storage_index="73" tap_mode="classic" trigger_index="7" type="unknown"/>
+          <node data_index="78" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="sound:sound|sound_rom_cs" storage_index="78" tap_mode="classic" trigger_index="12" type="unknown"/>
+          <node data_index="77" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" level-0="dont_care" name="sound:sound|sound_ram_cs" storage_index="77" tap_mode="classic" trigger_index="11" type="unknown"/>
+          <node data_index="72" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" level-0="dont_care" name="sound:sound|opl_cs" storage_index="72" tap_mode="classic" trigger_index="6" type="unknown"/>
+          <node data_index="74" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="sound:sound|req_cs" storage_index="74" tap_mode="classic" trigger_index="8" type="unknown"/>
+          <node data_index="75" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="sound:sound|req_off_cs" storage_index="75" tap_mode="classic" trigger_index="9" type="unknown"/>
+          <node is_selected="false" level-0="alt_or" name="CPU" order="lsb_to_msb" state="expand" storage-0="alt_or" type="combinatorial">
+            <node is_selected="false" level-0="alt_or" name="sound:sound|T80s:cpu|A[15..0]" order="msb_to_lsb" type="combinatorial">
+              <node data_index="6" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="false" name="sound:sound|T80s:cpu|A[15]" storage_index="6" tap_mode="classic" type="unknown"/>
+              <node data_index="5" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="false" name="sound:sound|T80s:cpu|A[14]" storage_index="5" tap_mode="classic" type="unknown"/>
+              <node data_index="4" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="false" name="sound:sound|T80s:cpu|A[13]" storage_index="4" tap_mode="classic" type="unknown"/>
+              <node data_index="3" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="false" name="sound:sound|T80s:cpu|A[12]" storage_index="3" tap_mode="classic" type="unknown"/>
+              <node data_index="2" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="false" name="sound:sound|T80s:cpu|A[11]" storage_index="2" tap_mode="classic" type="unknown"/>
+              <node data_index="1" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="false" name="sound:sound|T80s:cpu|A[10]" storage_index="1" tap_mode="classic" type="unknown"/>
+              <node data_index="15" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="false" name="sound:sound|T80s:cpu|A[9]" storage_index="15" tap_mode="classic" type="unknown"/>
+              <node data_index="14" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="false" name="sound:sound|T80s:cpu|A[8]" storage_index="14" tap_mode="classic" type="unknown"/>
+              <node data_index="13" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="false" name="sound:sound|T80s:cpu|A[7]" storage_index="13" tap_mode="classic" type="unknown"/>
+              <node data_index="12" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="false" name="sound:sound|T80s:cpu|A[6]" storage_index="12" tap_mode="classic" type="unknown"/>
+              <node data_index="11" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="false" name="sound:sound|T80s:cpu|A[5]" storage_index="11" tap_mode="classic" type="unknown"/>
+              <node data_index="10" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="false" name="sound:sound|T80s:cpu|A[4]" storage_index="10" tap_mode="classic" type="unknown"/>
+              <node data_index="9" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="false" name="sound:sound|T80s:cpu|A[3]" storage_index="9" tap_mode="classic" type="unknown"/>
+              <node data_index="8" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="false" name="sound:sound|T80s:cpu|A[2]" storage_index="8" tap_mode="classic" type="unknown"/>
+              <node data_index="7" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="false" name="sound:sound|T80s:cpu|A[1]" storage_index="7" tap_mode="classic" type="unknown"/>
+              <node data_index="0" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="false" name="sound:sound|T80s:cpu|A[0]" storage_index="0" tap_mode="classic" type="unknown"/>
+            </node>
+            <node is_selected="false" level-0="alt_or" name="sound:sound|T80s:cpu|DI[7..0]" order="msb_to_lsb" type="combinatorial">
+              <node data_index="23" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="false" name="sound:sound|T80s:cpu|DI[7]" storage_index="23" tap_mode="classic" type="unknown"/>
+              <node data_index="22" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="false" name="sound:sound|T80s:cpu|DI[6]" storage_index="22" tap_mode="classic" type="unknown"/>
+              <node data_index="21" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="false" name="sound:sound|T80s:cpu|DI[5]" storage_index="21" tap_mode="classic" type="unknown"/>
+              <node data_index="20" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="false" name="sound:sound|T80s:cpu|DI[4]" storage_index="20" tap_mode="classic" type="unknown"/>
+              <node data_index="19" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="false" name="sound:sound|T80s:cpu|DI[3]" storage_index="19" tap_mode="classic" type="unknown"/>
+              <node data_index="18" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="false" name="sound:sound|T80s:cpu|DI[2]" storage_index="18" tap_mode="classic" type="unknown"/>
+              <node data_index="17" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="false" name="sound:sound|T80s:cpu|DI[1]" storage_index="17" tap_mode="classic" type="unknown"/>
+              <node data_index="16" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="false" name="sound:sound|T80s:cpu|DI[0]" storage_index="16" tap_mode="classic" type="unknown"/>
+            </node>
+            <node is_selected="false" level-0="alt_or" name="sound:sound|T80s:cpu|DO[7..0]" order="msb_to_lsb" type="combinatorial">
+              <node data_index="31" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="false" name="sound:sound|T80s:cpu|DO[7]" storage_index="31" tap_mode="classic" type="unknown"/>
+              <node data_index="30" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="false" name="sound:sound|T80s:cpu|DO[6]" storage_index="30" tap_mode="classic" type="unknown"/>
+              <node data_index="29" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="false" name="sound:sound|T80s:cpu|DO[5]" storage_index="29" tap_mode="classic" type="unknown"/>
+              <node data_index="28" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="false" name="sound:sound|T80s:cpu|DO[4]" storage_index="28" tap_mode="classic" type="unknown"/>
+              <node data_index="27" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="false" name="sound:sound|T80s:cpu|DO[3]" storage_index="27" tap_mode="classic" type="unknown"/>
+              <node data_index="26" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="false" name="sound:sound|T80s:cpu|DO[2]" storage_index="26" tap_mode="classic" type="unknown"/>
+              <node data_index="25" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="false" name="sound:sound|T80s:cpu|DO[1]" storage_index="25" tap_mode="classic" type="unknown"/>
+              <node data_index="24" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="false" name="sound:sound|T80s:cpu|DO[0]" storage_index="24" tap_mode="classic" type="unknown"/>
+            </node>
+            <node data_index="33" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="sound:sound|T80s:cpu|MREQ_n" storage_index="33" tap_mode="classic" trigger_index="1" type="unknown"/>
+            <node data_index="35" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="sound:sound|T80s:cpu|RD_n" storage_index="35" tap_mode="classic" trigger_index="3" type="unknown"/>
+            <node data_index="37" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" level-0="dont_care" name="sound:sound|T80s:cpu|WR_n" storage_index="37" tap_mode="classic" trigger_index="5" type="unknown"/>
+            <node data_index="36" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="sound:sound|T80s:cpu|RFSH_n" storage_index="36" tap_mode="classic" trigger_index="4" type="unknown"/>
+            <node data_index="34" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" level-0="rising edge" name="sound:sound|T80s:cpu|NMI_n" storage_index="34" tap_mode="classic" trigger_index="2" type="unknown"/>
+            <node data_index="32" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="sound:sound|T80s:cpu|INT_n" storage_index="32" tap_mode="classic" trigger_index="0" type="unknown"/>
+          </node>
+          <node is_selected="false" level-0="alt_or" name="OPL" order="lsb_to_msb" state="expand" storage-0="alt_or" type="combinatorial">
+            <node duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="sound:sound|opl:opl|cs" tap_mode="classic" type="combinatorial"/>
+            <node duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="sound:sound|opl:opl|we" tap_mode="classic" type="combinatorial"/>
+            <node is_selected="false" level-0="alt_or" name="sound:sound|opl:opl|addr[1..0]" order="msb_to_lsb" type="combinatorial">
+              <node data_index="39" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="false" name="sound:sound|opl:opl|addr[1]" storage_index="39" tap_mode="classic" type="unknown"/>
+              <node data_index="38" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="false" name="sound:sound|opl:opl|addr[0]" storage_index="38" tap_mode="classic" type="unknown"/>
+            </node>
+            <node is_selected="false" level-0="alt_or" name="sound:sound|opl:opl|din[7..0]" order="msb_to_lsb" type="combinatorial">
+              <node data_index="47" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="false" name="sound:sound|opl:opl|din[7]" storage_index="47" tap_mode="classic" type="unknown"/>
+              <node data_index="46" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="false" name="sound:sound|opl:opl|din[6]" storage_index="46" tap_mode="classic" type="unknown"/>
+              <node data_index="45" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="false" name="sound:sound|opl:opl|din[5]" storage_index="45" tap_mode="classic" type="unknown"/>
+              <node data_index="44" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="false" name="sound:sound|opl:opl|din[4]" storage_index="44" tap_mode="classic" type="unknown"/>
+              <node data_index="43" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="false" name="sound:sound|opl:opl|din[3]" storage_index="43" tap_mode="classic" type="unknown"/>
+              <node data_index="42" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="false" name="sound:sound|opl:opl|din[2]" storage_index="42" tap_mode="classic" type="unknown"/>
+              <node data_index="41" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="false" name="sound:sound|opl:opl|din[1]" storage_index="41" tap_mode="classic" type="unknown"/>
+              <node data_index="40" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="false" name="sound:sound|opl:opl|din[0]" storage_index="40" tap_mode="classic" type="unknown"/>
+            </node>
+            <node is_selected="false" level-0="alt_or" name="sound:sound|opl:opl|dout[7..0]" order="msb_to_lsb" type="combinatorial">
+              <node data_index="55" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="false" name="sound:sound|opl:opl|dout[7]" storage_index="55" tap_mode="classic" type="unknown"/>
+              <node data_index="54" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="false" name="sound:sound|opl:opl|dout[6]" storage_index="54" tap_mode="classic" type="unknown"/>
+              <node data_index="53" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="false" name="sound:sound|opl:opl|dout[5]" storage_index="53" tap_mode="classic" type="unknown"/>
+              <node data_index="52" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="false" name="sound:sound|opl:opl|dout[4]" storage_index="52" tap_mode="classic" type="unknown"/>
+              <node data_index="51" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="false" name="sound:sound|opl:opl|dout[3]" storage_index="51" tap_mode="classic" type="unknown"/>
+              <node data_index="50" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="false" name="sound:sound|opl:opl|dout[2]" storage_index="50" tap_mode="classic" type="unknown"/>
+              <node data_index="49" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="false" name="sound:sound|opl:opl|dout[1]" storage_index="49" tap_mode="classic" type="unknown"/>
+              <node data_index="48" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="false" name="sound:sound|opl:opl|dout[0]" storage_index="48" tap_mode="classic" type="unknown"/>
+            </node>
+            <node is_selected="false" level-0="alt_or" name="sound:sound|opl:opl|sample[15..0]" order="msb_to_lsb" type="combinatorial">
+              <node data_index="62" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="false" name="sound:sound|opl:opl|sample[15]" storage_index="62" tap_mode="classic" type="unknown"/>
+              <node data_index="61" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="false" name="sound:sound|opl:opl|sample[14]" storage_index="61" tap_mode="classic" type="unknown"/>
+              <node data_index="60" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="false" name="sound:sound|opl:opl|sample[13]" storage_index="60" tap_mode="classic" type="unknown"/>
+              <node data_index="59" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="false" name="sound:sound|opl:opl|sample[12]" storage_index="59" tap_mode="classic" type="unknown"/>
+              <node data_index="58" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="false" name="sound:sound|opl:opl|sample[11]" storage_index="58" tap_mode="classic" type="unknown"/>
+              <node data_index="57" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="false" name="sound:sound|opl:opl|sample[10]" storage_index="57" tap_mode="classic" type="unknown"/>
+              <node data_index="71" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="false" name="sound:sound|opl:opl|sample[9]" storage_index="71" tap_mode="classic" type="unknown"/>
+              <node data_index="70" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="false" name="sound:sound|opl:opl|sample[8]" storage_index="70" tap_mode="classic" type="unknown"/>
+              <node data_index="69" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="false" name="sound:sound|opl:opl|sample[7]" storage_index="69" tap_mode="classic" type="unknown"/>
+              <node data_index="68" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="false" name="sound:sound|opl:opl|sample[6]" storage_index="68" tap_mode="classic" type="unknown"/>
+              <node data_index="67" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="false" name="sound:sound|opl:opl|sample[5]" storage_index="67" tap_mode="classic" type="unknown"/>
+              <node data_index="66" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="false" name="sound:sound|opl:opl|sample[4]" storage_index="66" tap_mode="classic" type="unknown"/>
+              <node data_index="65" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="false" name="sound:sound|opl:opl|sample[3]" storage_index="65" tap_mode="classic" type="unknown"/>
+              <node data_index="64" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="false" name="sound:sound|opl:opl|sample[2]" storage_index="64" tap_mode="classic" type="unknown"/>
+              <node data_index="63" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="false" name="sound:sound|opl:opl|sample[1]" storage_index="63" tap_mode="classic" type="unknown"/>
+              <node data_index="56" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="false" name="sound:sound|opl:opl|sample[0]" storage_index="56" tap_mode="classic" type="unknown"/>
+            </node>
+          </node>
+        </unified_setup_data_view>
+        <data_view>
+          <net data_index="78" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" level-0="dont_care" name="sound:sound|reset" storage_index="78" tap_mode="classic" trigger_index="12" type="unknown"/>
+          <net data_index="75" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" level-0="dont_care" name="sound:sound|req" storage_index="75" tap_mode="classic" trigger_index="9" type="unknown"/>
+          <net data_index="80" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="sound:sound|sound_rom_cs" storage_index="80" tap_mode="classic" trigger_index="14" type="unknown"/>
+          <net data_index="79" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" level-0="dont_care" name="sound:sound|sound_ram_cs" storage_index="79" tap_mode="classic" trigger_index="13" type="unknown"/>
+          <net data_index="74" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" level-0="dont_care" name="sound:sound|opl_cs" storage_index="74" tap_mode="classic" trigger_index="8" type="unknown"/>
+          <net data_index="76" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="sound:sound|req_cs" storage_index="76" tap_mode="classic" trigger_index="10" type="unknown"/>
+          <net data_index="77" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="sound:sound|req_off_cs" storage_index="77" tap_mode="classic" trigger_index="11" type="unknown"/>
+          <bus is_selected="false" level-0="alt_or" name="CPU" order="lsb_to_msb" state="expand" storage-0="alt_or" type="combinatorial">
+            <net data_index="6" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="false" name="sound:sound|T80s:cpu|A[15]" storage_index="6" tap_mode="classic" type="unknown"/>
+            <net data_index="5" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="false" name="sound:sound|T80s:cpu|A[14]" storage_index="5" tap_mode="classic" type="unknown"/>
+            <net data_index="4" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="false" name="sound:sound|T80s:cpu|A[13]" storage_index="4" tap_mode="classic" type="unknown"/>
+            <net data_index="3" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="false" name="sound:sound|T80s:cpu|A[12]" storage_index="3" tap_mode="classic" type="unknown"/>
+            <net data_index="2" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="false" name="sound:sound|T80s:cpu|A[11]" storage_index="2" tap_mode="classic" type="unknown"/>
+            <net data_index="1" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="false" name="sound:sound|T80s:cpu|A[10]" storage_index="1" tap_mode="classic" type="unknown"/>
+            <net data_index="15" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="false" name="sound:sound|T80s:cpu|A[9]" storage_index="15" tap_mode="classic" type="unknown"/>
+            <net data_index="14" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="false" name="sound:sound|T80s:cpu|A[8]" storage_index="14" tap_mode="classic" type="unknown"/>
+            <net data_index="13" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="false" name="sound:sound|T80s:cpu|A[7]" storage_index="13" tap_mode="classic" type="unknown"/>
+            <net data_index="12" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="false" name="sound:sound|T80s:cpu|A[6]" storage_index="12" tap_mode="classic" type="unknown"/>
+            <net data_index="11" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="false" name="sound:sound|T80s:cpu|A[5]" storage_index="11" tap_mode="classic" type="unknown"/>
+            <net data_index="10" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="false" name="sound:sound|T80s:cpu|A[4]" storage_index="10" tap_mode="classic" type="unknown"/>
+            <net data_index="9" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="false" name="sound:sound|T80s:cpu|A[3]" storage_index="9" tap_mode="classic" type="unknown"/>
+            <net data_index="8" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="false" name="sound:sound|T80s:cpu|A[2]" storage_index="8" tap_mode="classic" type="unknown"/>
+            <net data_index="7" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="false" name="sound:sound|T80s:cpu|A[1]" storage_index="7" tap_mode="classic" type="unknown"/>
+            <net data_index="0" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="false" name="sound:sound|T80s:cpu|A[0]" storage_index="0" tap_mode="classic" type="unknown"/>
+            <net data_index="23" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="false" name="sound:sound|T80s:cpu|DI[7]" storage_index="23" tap_mode="classic" type="unknown"/>
+            <net data_index="22" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="false" name="sound:sound|T80s:cpu|DI[6]" storage_index="22" tap_mode="classic" type="unknown"/>
+            <net data_index="21" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="false" name="sound:sound|T80s:cpu|DI[5]" storage_index="21" tap_mode="classic" type="unknown"/>
+            <net data_index="20" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="false" name="sound:sound|T80s:cpu|DI[4]" storage_index="20" tap_mode="classic" type="unknown"/>
+            <net data_index="19" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="false" name="sound:sound|T80s:cpu|DI[3]" storage_index="19" tap_mode="classic" type="unknown"/>
+            <net data_index="18" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="false" name="sound:sound|T80s:cpu|DI[2]" storage_index="18" tap_mode="classic" type="unknown"/>
+            <net data_index="17" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="false" name="sound:sound|T80s:cpu|DI[1]" storage_index="17" tap_mode="classic" type="unknown"/>
+            <net data_index="16" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="false" name="sound:sound|T80s:cpu|DI[0]" storage_index="16" tap_mode="classic" type="unknown"/>
+            <net data_index="31" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="false" name="sound:sound|T80s:cpu|DO[7]" storage_index="31" tap_mode="classic" type="unknown"/>
+            <net data_index="30" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="false" name="sound:sound|T80s:cpu|DO[6]" storage_index="30" tap_mode="classic" type="unknown"/>
+            <net data_index="29" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="false" name="sound:sound|T80s:cpu|DO[5]" storage_index="29" tap_mode="classic" type="unknown"/>
+            <net data_index="28" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="false" name="sound:sound|T80s:cpu|DO[4]" storage_index="28" tap_mode="classic" type="unknown"/>
+            <net data_index="27" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="false" name="sound:sound|T80s:cpu|DO[3]" storage_index="27" tap_mode="classic" type="unknown"/>
+            <net data_index="26" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="false" name="sound:sound|T80s:cpu|DO[2]" storage_index="26" tap_mode="classic" type="unknown"/>
+            <net data_index="25" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="false" name="sound:sound|T80s:cpu|DO[1]" storage_index="25" tap_mode="classic" type="unknown"/>
+            <net data_index="24" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="false" name="sound:sound|T80s:cpu|DO[0]" storage_index="24" tap_mode="classic" type="unknown"/>
+            <net data_index="33" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="sound:sound|T80s:cpu|MREQ_n" storage_index="33" tap_mode="classic" trigger_index="1" type="unknown"/>
+            <net data_index="35" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="sound:sound|T80s:cpu|RD_n" storage_index="35" tap_mode="classic" trigger_index="3" type="unknown"/>
+            <net data_index="37" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" level-0="dont_care" name="sound:sound|T80s:cpu|WR_n" storage_index="37" tap_mode="classic" trigger_index="5" type="unknown"/>
+            <net data_index="36" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="sound:sound|T80s:cpu|RFSH_n" storage_index="36" tap_mode="classic" trigger_index="4" type="unknown"/>
+            <net data_index="34" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" level-0="rising edge" name="sound:sound|T80s:cpu|NMI_n" storage_index="34" tap_mode="classic" trigger_index="2" type="unknown"/>
+            <net data_index="32" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="sound:sound|T80s:cpu|INT_n" storage_index="32" tap_mode="classic" trigger_index="0" type="unknown"/>
+          </bus>
+          <bus is_selected="false" level-0="alt_or" name="OPL" order="lsb_to_msb" state="expand" storage-0="alt_or" type="combinatorial">
+            <net data_index="40" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="sound:sound|opl:opl|cs" storage_index="40" tap_mode="classic" trigger_index="6" type="unknown"/>
+            <net data_index="73" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="sound:sound|opl:opl|we" storage_index="73" tap_mode="classic" trigger_index="7" type="unknown"/>
+            <net data_index="39" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="false" name="sound:sound|opl:opl|addr[1]" storage_index="39" tap_mode="classic" type="unknown"/>
+            <net data_index="38" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="false" name="sound:sound|opl:opl|addr[0]" storage_index="38" tap_mode="classic" type="unknown"/>
+            <net data_index="48" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="false" name="sound:sound|opl:opl|din[7]" storage_index="48" tap_mode="classic" type="unknown"/>
+            <net data_index="47" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="false" name="sound:sound|opl:opl|din[6]" storage_index="47" tap_mode="classic" type="unknown"/>
+            <net data_index="46" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="false" name="sound:sound|opl:opl|din[5]" storage_index="46" tap_mode="classic" type="unknown"/>
+            <net data_index="45" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="false" name="sound:sound|opl:opl|din[4]" storage_index="45" tap_mode="classic" type="unknown"/>
+            <net data_index="44" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="false" name="sound:sound|opl:opl|din[3]" storage_index="44" tap_mode="classic" type="unknown"/>
+            <net data_index="43" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="false" name="sound:sound|opl:opl|din[2]" storage_index="43" tap_mode="classic" type="unknown"/>
+            <net data_index="42" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="false" name="sound:sound|opl:opl|din[1]" storage_index="42" tap_mode="classic" type="unknown"/>
+            <net data_index="41" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="false" name="sound:sound|opl:opl|din[0]" storage_index="41" tap_mode="classic" type="unknown"/>
+            <net data_index="56" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="false" name="sound:sound|opl:opl|dout[7]" storage_index="56" tap_mode="classic" type="unknown"/>
+            <net data_index="55" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="false" name="sound:sound|opl:opl|dout[6]" storage_index="55" tap_mode="classic" type="unknown"/>
+            <net data_index="54" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="false" name="sound:sound|opl:opl|dout[5]" storage_index="54" tap_mode="classic" type="unknown"/>
+            <net data_index="53" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="false" name="sound:sound|opl:opl|dout[4]" storage_index="53" tap_mode="classic" type="unknown"/>
+            <net data_index="52" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="false" name="sound:sound|opl:opl|dout[3]" storage_index="52" tap_mode="classic" type="unknown"/>
+            <net data_index="51" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="false" name="sound:sound|opl:opl|dout[2]" storage_index="51" tap_mode="classic" type="unknown"/>
+            <net data_index="50" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="false" name="sound:sound|opl:opl|dout[1]" storage_index="50" tap_mode="classic" type="unknown"/>
+            <net data_index="49" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="false" name="sound:sound|opl:opl|dout[0]" storage_index="49" tap_mode="classic" type="unknown"/>
+            <net data_index="63" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="false" name="sound:sound|opl:opl|sample[15]" storage_index="63" tap_mode="classic" type="unknown"/>
+            <net data_index="62" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="false" name="sound:sound|opl:opl|sample[14]" storage_index="62" tap_mode="classic" type="unknown"/>
+            <net data_index="61" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="false" name="sound:sound|opl:opl|sample[13]" storage_index="61" tap_mode="classic" type="unknown"/>
+            <net data_index="60" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="false" name="sound:sound|opl:opl|sample[12]" storage_index="60" tap_mode="classic" type="unknown"/>
+            <net data_index="59" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="false" name="sound:sound|opl:opl|sample[11]" storage_index="59" tap_mode="classic" type="unknown"/>
+            <net data_index="58" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="false" name="sound:sound|opl:opl|sample[10]" storage_index="58" tap_mode="classic" type="unknown"/>
+            <net data_index="72" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="false" name="sound:sound|opl:opl|sample[9]" storage_index="72" tap_mode="classic" type="unknown"/>
+            <net data_index="71" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="false" name="sound:sound|opl:opl|sample[8]" storage_index="71" tap_mode="classic" type="unknown"/>
+            <net data_index="70" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="false" name="sound:sound|opl:opl|sample[7]" storage_index="70" tap_mode="classic" type="unknown"/>
+            <net data_index="69" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="false" name="sound:sound|opl:opl|sample[6]" storage_index="69" tap_mode="classic" type="unknown"/>
+            <net data_index="68" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="false" name="sound:sound|opl:opl|sample[5]" storage_index="68" tap_mode="classic" type="unknown"/>
+            <net data_index="67" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="false" name="sound:sound|opl:opl|sample[4]" storage_index="67" tap_mode="classic" type="unknown"/>
+            <net data_index="66" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="false" name="sound:sound|opl:opl|sample[3]" storage_index="66" tap_mode="classic" type="unknown"/>
+            <net data_index="65" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="false" name="sound:sound|opl:opl|sample[2]" storage_index="65" tap_mode="classic" type="unknown"/>
+            <net data_index="64" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="false" name="sound:sound|opl:opl|sample[1]" storage_index="64" tap_mode="classic" type="unknown"/>
+            <net data_index="57" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="false" name="sound:sound|opl:opl|sample[0]" storage_index="57" tap_mode="classic" type="unknown"/>
+          </bus>
+        </data_view>
+        <setup_view>
+          <net data_index="78" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" level-0="dont_care" name="sound:sound|reset" storage_index="78" tap_mode="classic" trigger_index="12" type="unknown"/>
+          <net data_index="75" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" level-0="dont_care" name="sound:sound|req" storage_index="75" tap_mode="classic" trigger_index="9" type="unknown"/>
+          <net data_index="80" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="sound:sound|sound_rom_cs" storage_index="80" tap_mode="classic" trigger_index="14" type="unknown"/>
+          <net data_index="79" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" level-0="dont_care" name="sound:sound|sound_ram_cs" storage_index="79" tap_mode="classic" trigger_index="13" type="unknown"/>
+          <net data_index="74" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" level-0="dont_care" name="sound:sound|opl_cs" storage_index="74" tap_mode="classic" trigger_index="8" type="unknown"/>
+          <net data_index="76" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="sound:sound|req_cs" storage_index="76" tap_mode="classic" trigger_index="10" type="unknown"/>
+          <net data_index="77" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="sound:sound|req_off_cs" storage_index="77" tap_mode="classic" trigger_index="11" type="unknown"/>
+          <bus is_selected="false" level-0="alt_or" name="CPU" order="lsb_to_msb" state="expand" storage-0="alt_or" type="combinatorial">
+            <net data_index="6" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="false" name="sound:sound|T80s:cpu|A[15]" storage_index="6" tap_mode="classic" type="unknown"/>
+            <net data_index="5" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="false" name="sound:sound|T80s:cpu|A[14]" storage_index="5" tap_mode="classic" type="unknown"/>
+            <net data_index="4" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="false" name="sound:sound|T80s:cpu|A[13]" storage_index="4" tap_mode="classic" type="unknown"/>
+            <net data_index="3" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="false" name="sound:sound|T80s:cpu|A[12]" storage_index="3" tap_mode="classic" type="unknown"/>
+            <net data_index="2" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="false" name="sound:sound|T80s:cpu|A[11]" storage_index="2" tap_mode="classic" type="unknown"/>
+            <net data_index="1" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="false" name="sound:sound|T80s:cpu|A[10]" storage_index="1" tap_mode="classic" type="unknown"/>
+            <net data_index="15" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="false" name="sound:sound|T80s:cpu|A[9]" storage_index="15" tap_mode="classic" type="unknown"/>
+            <net data_index="14" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="false" name="sound:sound|T80s:cpu|A[8]" storage_index="14" tap_mode="classic" type="unknown"/>
+            <net data_index="13" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="false" name="sound:sound|T80s:cpu|A[7]" storage_index="13" tap_mode="classic" type="unknown"/>
+            <net data_index="12" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="false" name="sound:sound|T80s:cpu|A[6]" storage_index="12" tap_mode="classic" type="unknown"/>
+            <net data_index="11" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="false" name="sound:sound|T80s:cpu|A[5]" storage_index="11" tap_mode="classic" type="unknown"/>
+            <net data_index="10" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="false" name="sound:sound|T80s:cpu|A[4]" storage_index="10" tap_mode="classic" type="unknown"/>
+            <net data_index="9" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="false" name="sound:sound|T80s:cpu|A[3]" storage_index="9" tap_mode="classic" type="unknown"/>
+            <net data_index="8" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="false" name="sound:sound|T80s:cpu|A[2]" storage_index="8" tap_mode="classic" type="unknown"/>
+            <net data_index="7" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="false" name="sound:sound|T80s:cpu|A[1]" storage_index="7" tap_mode="classic" type="unknown"/>
+            <net data_index="0" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="false" name="sound:sound|T80s:cpu|A[0]" storage_index="0" tap_mode="classic" type="unknown"/>
+            <net data_index="23" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="false" name="sound:sound|T80s:cpu|DI[7]" storage_index="23" tap_mode="classic" type="unknown"/>
+            <net data_index="22" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="false" name="sound:sound|T80s:cpu|DI[6]" storage_index="22" tap_mode="classic" type="unknown"/>
+            <net data_index="21" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="false" name="sound:sound|T80s:cpu|DI[5]" storage_index="21" tap_mode="classic" type="unknown"/>
+            <net data_index="20" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="false" name="sound:sound|T80s:cpu|DI[4]" storage_index="20" tap_mode="classic" type="unknown"/>
+            <net data_index="19" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="false" name="sound:sound|T80s:cpu|DI[3]" storage_index="19" tap_mode="classic" type="unknown"/>
+            <net data_index="18" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="false" name="sound:sound|T80s:cpu|DI[2]" storage_index="18" tap_mode="classic" type="unknown"/>
+            <net data_index="17" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="false" name="sound:sound|T80s:cpu|DI[1]" storage_index="17" tap_mode="classic" type="unknown"/>
+            <net data_index="16" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="false" name="sound:sound|T80s:cpu|DI[0]" storage_index="16" tap_mode="classic" type="unknown"/>
+            <net data_index="31" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="false" name="sound:sound|T80s:cpu|DO[7]" storage_index="31" tap_mode="classic" type="unknown"/>
+            <net data_index="30" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="false" name="sound:sound|T80s:cpu|DO[6]" storage_index="30" tap_mode="classic" type="unknown"/>
+            <net data_index="29" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="false" name="sound:sound|T80s:cpu|DO[5]" storage_index="29" tap_mode="classic" type="unknown"/>
+            <net data_index="28" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="false" name="sound:sound|T80s:cpu|DO[4]" storage_index="28" tap_mode="classic" type="unknown"/>
+            <net data_index="27" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="false" name="sound:sound|T80s:cpu|DO[3]" storage_index="27" tap_mode="classic" type="unknown"/>
+            <net data_index="26" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="false" name="sound:sound|T80s:cpu|DO[2]" storage_index="26" tap_mode="classic" type="unknown"/>
+            <net data_index="25" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="false" name="sound:sound|T80s:cpu|DO[1]" storage_index="25" tap_mode="classic" type="unknown"/>
+            <net data_index="24" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="false" name="sound:sound|T80s:cpu|DO[0]" storage_index="24" tap_mode="classic" type="unknown"/>
+            <net data_index="33" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="sound:sound|T80s:cpu|MREQ_n" storage_index="33" tap_mode="classic" trigger_index="1" type="unknown"/>
+            <net data_index="35" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="sound:sound|T80s:cpu|RD_n" storage_index="35" tap_mode="classic" trigger_index="3" type="unknown"/>
+            <net data_index="37" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" level-0="dont_care" name="sound:sound|T80s:cpu|WR_n" storage_index="37" tap_mode="classic" trigger_index="5" type="unknown"/>
+            <net data_index="36" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="sound:sound|T80s:cpu|RFSH_n" storage_index="36" tap_mode="classic" trigger_index="4" type="unknown"/>
+            <net data_index="34" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" level-0="rising edge" name="sound:sound|T80s:cpu|NMI_n" storage_index="34" tap_mode="classic" trigger_index="2" type="unknown"/>
+            <net data_index="32" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="sound:sound|T80s:cpu|INT_n" storage_index="32" tap_mode="classic" trigger_index="0" type="unknown"/>
+          </bus>
+          <bus is_selected="false" level-0="alt_or" name="OPL" order="lsb_to_msb" state="expand" storage-0="alt_or" type="combinatorial">
+            <net data_index="40" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="sound:sound|opl:opl|cs" storage_index="40" tap_mode="classic" trigger_index="6" type="unknown"/>
+            <net data_index="73" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="true" name="sound:sound|opl:opl|we" storage_index="73" tap_mode="classic" trigger_index="7" type="unknown"/>
+            <net data_index="39" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="false" name="sound:sound|opl:opl|addr[1]" storage_index="39" tap_mode="classic" type="unknown"/>
+            <net data_index="38" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="false" name="sound:sound|opl:opl|addr[0]" storage_index="38" tap_mode="classic" type="unknown"/>
+            <net data_index="48" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="false" name="sound:sound|opl:opl|din[7]" storage_index="48" tap_mode="classic" type="unknown"/>
+            <net data_index="47" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="false" name="sound:sound|opl:opl|din[6]" storage_index="47" tap_mode="classic" type="unknown"/>
+            <net data_index="46" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="false" name="sound:sound|opl:opl|din[5]" storage_index="46" tap_mode="classic" type="unknown"/>
+            <net data_index="45" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="false" name="sound:sound|opl:opl|din[4]" storage_index="45" tap_mode="classic" type="unknown"/>
+            <net data_index="44" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="false" name="sound:sound|opl:opl|din[3]" storage_index="44" tap_mode="classic" type="unknown"/>
+            <net data_index="43" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="false" name="sound:sound|opl:opl|din[2]" storage_index="43" tap_mode="classic" type="unknown"/>
+            <net data_index="42" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="false" name="sound:sound|opl:opl|din[1]" storage_index="42" tap_mode="classic" type="unknown"/>
+            <net data_index="41" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="false" name="sound:sound|opl:opl|din[0]" storage_index="41" tap_mode="classic" type="unknown"/>
+            <net data_index="56" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="false" name="sound:sound|opl:opl|dout[7]" storage_index="56" tap_mode="classic" type="unknown"/>
+            <net data_index="55" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="false" name="sound:sound|opl:opl|dout[6]" storage_index="55" tap_mode="classic" type="unknown"/>
+            <net data_index="54" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="false" name="sound:sound|opl:opl|dout[5]" storage_index="54" tap_mode="classic" type="unknown"/>
+            <net data_index="53" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="false" name="sound:sound|opl:opl|dout[4]" storage_index="53" tap_mode="classic" type="unknown"/>
+            <net data_index="52" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="false" name="sound:sound|opl:opl|dout[3]" storage_index="52" tap_mode="classic" type="unknown"/>
+            <net data_index="51" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="false" name="sound:sound|opl:opl|dout[2]" storage_index="51" tap_mode="classic" type="unknown"/>
+            <net data_index="50" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="false" name="sound:sound|opl:opl|dout[1]" storage_index="50" tap_mode="classic" type="unknown"/>
+            <net data_index="49" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="false" name="sound:sound|opl:opl|dout[0]" storage_index="49" tap_mode="classic" type="unknown"/>
+            <net data_index="63" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="false" name="sound:sound|opl:opl|sample[15]" storage_index="63" tap_mode="classic" type="unknown"/>
+            <net data_index="62" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="false" name="sound:sound|opl:opl|sample[14]" storage_index="62" tap_mode="classic" type="unknown"/>
+            <net data_index="61" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="false" name="sound:sound|opl:opl|sample[13]" storage_index="61" tap_mode="classic" type="unknown"/>
+            <net data_index="60" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="false" name="sound:sound|opl:opl|sample[12]" storage_index="60" tap_mode="classic" type="unknown"/>
+            <net data_index="59" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="false" name="sound:sound|opl:opl|sample[11]" storage_index="59" tap_mode="classic" type="unknown"/>
+            <net data_index="58" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="false" name="sound:sound|opl:opl|sample[10]" storage_index="58" tap_mode="classic" type="unknown"/>
+            <net data_index="72" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="false" name="sound:sound|opl:opl|sample[9]" storage_index="72" tap_mode="classic" type="unknown"/>
+            <net data_index="71" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="false" name="sound:sound|opl:opl|sample[8]" storage_index="71" tap_mode="classic" type="unknown"/>
+            <net data_index="70" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="false" name="sound:sound|opl:opl|sample[7]" storage_index="70" tap_mode="classic" type="unknown"/>
+            <net data_index="69" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="false" name="sound:sound|opl:opl|sample[6]" storage_index="69" tap_mode="classic" type="unknown"/>
+            <net data_index="68" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="false" name="sound:sound|opl:opl|sample[5]" storage_index="68" tap_mode="classic" type="unknown"/>
+            <net data_index="67" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="false" name="sound:sound|opl:opl|sample[4]" storage_index="67" tap_mode="classic" type="unknown"/>
+            <net data_index="66" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="false" name="sound:sound|opl:opl|sample[3]" storage_index="66" tap_mode="classic" type="unknown"/>
+            <net data_index="65" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="false" name="sound:sound|opl:opl|sample[2]" storage_index="65" tap_mode="classic" type="unknown"/>
+            <net data_index="64" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="false" name="sound:sound|opl:opl|sample[1]" storage_index="64" tap_mode="classic" type="unknown"/>
+            <net data_index="57" duplicate_name_allowed="false" is_data_input="true" is_node_valid="true" is_selected="false" is_storage_input="true" is_trigger_input="false" name="sound:sound|opl:opl|sample[0]" storage_index="57" tap_mode="classic" type="unknown"/>
+          </bus>
+        </setup_view>
+        <trigger_in_editor/>
+        <trigger_out_editor/>
+      </presentation>
+      <trigger attribute_mem_mode="false" gap_record="true" global_temp="1" name="trigger: 2019/11/05 15:48:29  #1" position="pre" power_up_trigger_mode="false" record_data_gap="true" segment_size="128" storage_mode="off" storage_qualifier_disabled="no" storage_qualifier_port_is_pin="true" storage_qualifier_port_name="auto_stp_external_storage_qualifier" storage_qualifier_port_tap_mode="classic" trigger_type="circular">
+        <power_up_trigger position="pre" storage_qualifier_disabled="no"/>
+        <events use_custom_flow_control="no">
+          <level enabled="yes" name="condition1" type="basic">'sound:sound|T80s:cpu|NMI_n' == rising edge
+            <power_up enabled="yes">
+            </power_up>
+            <op_node/>
+          </level>
+        </events>
+        <storage_qualifier_events>
+          <transitional>111111111111111111111111111111111111111111111111111111111111111111111111111111111
+            <pwr_up_transitional>111111111111111111111111111111111111111111111111111111111111111111111111111111111</pwr_up_transitional>
+          </transitional>
+          <storage_qualifier_level type="basic">
+            <power_up>
+            </power_up>
+            <op_node/>
+          </storage_qualifier_level>
+          <storage_qualifier_level type="basic">
+            <power_up>
+            </power_up>
+            <op_node/>
+          </storage_qualifier_level>
+          <storage_qualifier_level type="basic">
+            <power_up>
+            </power_up>
+            <op_node/>
+          </storage_qualifier_level>
+        </storage_qualifier_events>
+      </trigger>
+    </signal_set>
+  </instance>
+  <mnemonics/>
+  <static_plugin_mnemonics/>
+</session>

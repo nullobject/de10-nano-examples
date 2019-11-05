@@ -69,6 +69,14 @@ begin
     rout => reset
   );
 
+  -- generate a request pulse after powering on, or when KEY1 is pressed
+  req_gen : entity work.reset_gen
+  port map (
+    clk  => sys_clk,
+    rin  => not key(1),
+    rout => snd_req
+  );
+
   sound : entity work.sound
   port map (
     reset  => reset,
@@ -89,13 +97,5 @@ begin
     q     => audio
   );
 
-  process (clk, reset)
-  begin
-    if reset = '1' then
-      snd_req <= '1';
-      snd_data <= x"34";
-     elsif rising_edge(clk) then
-      snd_req <= '0';
-    end if;
-  end process;
+  snd_data <= x"34";
 end arch;
