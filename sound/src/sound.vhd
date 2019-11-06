@@ -43,7 +43,6 @@ end entity sound;
 
 architecture arch of sound is
   -- CPU signals
-  signal cpu_cen    : std_logic;
   signal cpu_addr   : unsigned(CPU_ADDR_WIDTH-1 downto 0);
   signal cpu_din    : byte_t;
   signal cpu_dout   : byte_t;

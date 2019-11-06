@@ -44,7 +44,7 @@ architecture arch of opl is
 
   component opl3 is
     generic (
-      OPLCLK : natural := 48000000
+      OPLCLK : natural
     );
     port (
       clk     : in std_logic;
@@ -65,6 +65,9 @@ architecture arch of opl is
   end component opl3;
 begin
   opl3_inst : component opl3
+  generic map (
+    OPLCLK => 48000000
+  )
   port map (
     rst_n => not reset,
 
@@ -73,7 +76,7 @@ begin
 
     irq_n => irq_n,
 
-    period_80us => std_logic_vector(to_unsigned(2560, 13)),
+    period_80us => std_logic_vector(to_unsigned(3840, 13)),
 
     addr => addr,
     din  => din,
