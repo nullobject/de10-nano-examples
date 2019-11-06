@@ -87,9 +87,9 @@ begin
   req_edge_detector : entity work.edge_detector
   generic map (RISING => true)
   port map (
-    clk  => clk,
+    clk  => sys_clk,
     data => req,
-    edge => snd_req
+    q    => snd_req
   );
 
   sound : entity work.sound
