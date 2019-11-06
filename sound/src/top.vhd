@@ -112,7 +112,7 @@ begin
     q     => audio
   );
 
-  snd_data <= x"34";
+  snd_data <= x"32";
 
   audio_l <= audio;
   audio_r <= audio;
