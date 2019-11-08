@@ -35,4 +35,5 @@ package common is
   constant SOUND_RAM_ADDR_WIDTH : natural := 11;
 
   subtype byte_t is std_logic_vector(7 downto 0);
+  subtype audio_t is signed(15 downto 0);
 end package common;

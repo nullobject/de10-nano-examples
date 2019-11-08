@@ -46,9 +46,9 @@ architecture arch of top is
 
   signal req : std_logic;
 
-  signal snd_req    : std_logic;
-  signal snd_data   : byte_t;
-  signal snd_sample : signed(15 downto 0);
+  signal snd_req   : std_logic;
+  signal snd_data  : byte_t;
+  signal snd_audio : audio_t;
 
   signal audio : std_logic;
 begin
@@ -94,12 +94,12 @@ begin
 
   sound : entity work.sound
   port map (
-    reset  => reset,
-    clk    => sys_clk,
-    cen    => cen_4,
-    req    => snd_req,
-    data   => snd_data,
-    sample => snd_sample
+    reset => reset,
+    clk   => sys_clk,
+    cen   => cen_4,
+    req   => snd_req,
+    data  => snd_data,
+    audio => snd_audio
   );
 
   -- converts audio samples to an analog signal
@@ -108,7 +108,7 @@ begin
   port map (
     reset => reset,
     clk   => clk,
-    data  => (not snd_sample(15)) & snd_sample(14 downto 0),
+    data  => (not snd_audio(15)) & snd_audio(14 downto 0),
     q     => audio
   );
 

@@ -36,8 +36,8 @@ entity sound is
     req  : in std_logic;
     data : in byte_t;
 
-    -- sample data
-    sample : out signed(15 downto 0)
+    -- audio data
+    audio : out audio_t
   );
 end entity sound;
 
@@ -121,7 +121,7 @@ begin
     din    => cpu_dout,
     dout   => opl_data,
     we     => not cpu_wr_n,
-    sample => sample
+    sample => audio
   );
 
   nmi : process (clk, reset)
