@@ -79,19 +79,20 @@ set_location_assignment PIN_AH16 -to key[1]
 set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to key[0]
 set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to key[1]
 
-set_global_assignment -name VHDL_FILE src/clock_divider.vhd
-set_global_assignment -name VHDL_FILE src/common.vhd
-set_global_assignment -name VHDL_FILE src/edge_detector.vhd
-set_global_assignment -name VHDL_FILE src/reset_gen.vhd
-set_global_assignment -name VHDL_FILE src/single_port_ram.vhd
-set_global_assignment -name VHDL_FILE src/single_port_rom.vhd
-set_global_assignment -name VHDL_FILE src/sigma_delta_dac.vhd
-set_global_assignment -name VHDL_FILE src/sound.vhd
-set_global_assignment -name VHDL_FILE src/top.vhd
 set_global_assignment -name QIP_FILE src/opl3.qip
 set_global_assignment -name QIP_FILE src/pll.qip
 set_global_assignment -name QIP_FILE src/t80.qip
 set_global_assignment -name SDC_FILE src/top.sdc
+set_global_assignment -name VHDL_FILE src/clock_divider.vhd
+set_global_assignment -name VHDL_FILE src/common.vhd
+set_global_assignment -name VHDL_FILE src/edge_detector.vhd
+set_global_assignment -name VHDL_FILE src/msm5205.vhd
+set_global_assignment -name VHDL_FILE src/reset_gen.vhd
+set_global_assignment -name VHDL_FILE src/sigma_delta_dac.vhd
+set_global_assignment -name VHDL_FILE src/single_port_ram.vhd
+set_global_assignment -name VHDL_FILE src/single_port_rom.vhd
+set_global_assignment -name VHDL_FILE src/sound.vhd
+set_global_assignment -name VHDL_FILE src/top.vhd
 
 set_global_assignment -name ENABLE_SIGNALTAP ON
 set_global_assignment -name USE_SIGNALTAP_FILE sound.stp
