@@ -43,10 +43,13 @@ architecture arch of top is
 
   signal sys_clk : std_logic;
   signal cen_4   : std_logic;
+  signal cen_384 : std_logic;
 
-  signal req : std_logic;
+  signal snd : natural range 0 to 255 := 0;
 
-  signal snd_req   : std_logic;
+  signal next_btn : std_logic;
+  signal play_btn : std_logic;
+
   signal snd_data  : byte_t;
   signal snd_audio : audio_t;
 
@@ -67,39 +70,46 @@ begin
   generic map (DIVISOR => 12)
   port map (clk => sys_clk, cen => cen_4);
 
+  -- generate a 384KHz clock enable signal
+  clock_divider_384 : entity work.clock_divider
+  generic map (DIVISOR => 125)
+  port map (clk => sys_clk, cen => cen_384);
+
   -- generate a reset pulse after powering on, or when KEY0 is pressed
   reset_gen : entity work.reset_gen
   port map (
     clk  => sys_clk,
-    rin  => not key(0),
+    rin  => '0',
     rout => reset
   );
 
-  -- generate a request pulse after powering on, or when KEY1 is pressed
-  req_gen : entity work.reset_gen
+  -- detect when the NEXT button is pressed
+  next_edge_detector : entity work.edge_detector
+  generic map (FALLING => true)
   port map (
     clk  => sys_clk,
-    rin  => not key(1),
-    rout => req
+    data => key(0),
+    q    => next_btn
   );
 
-  -- detect rising edges of the req signal
-  req_edge_detector : entity work.edge_detector
-  generic map (RISING => true)
+  -- detect when the PLAY button is pressed
+  play_edge_detector : entity work.edge_detector
+  generic map (FALLING => true)
   port map (
     clk  => sys_clk,
-    data => req,
-    q    => snd_req
+    data => key(1),
+    q    => play_btn
   );
 
   sound : entity work.sound
   port map (
-    reset => reset,
-    clk   => sys_clk,
-    cen   => cen_4,
-    req   => snd_req,
-    data  => snd_data,
-    audio => snd_audio
+    reset   => reset,
+    clk     => sys_clk,
+    cen_4   => cen_4,
+    cen_384 => cen_384,
+    req     => play_btn,
+    data    => snd_data,
+    audio   => snd_audio
   );
 
   -- converts audio samples to an analog signal
@@ -112,7 +122,18 @@ begin
     q     => audio
   );
 
-  snd_data <= x"32";
+  process (clk)
+  begin
+    if rising_edge(clk) then
+      if next_btn = '1' then
+        snd <= snd + 1;
+      end if;
+    end if;
+  end process;
+
+  snd_data <= std_logic_vector(to_unsigned(snd, 8));
+
+  led <= snd_data;
 
   audio_l <= audio;
   audio_r <= audio;

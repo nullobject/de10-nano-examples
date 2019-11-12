@@ -27,13 +27,12 @@ package common is
 
   -- sound ROMs
   constant SOUND_ROM_1_ADDR_WIDTH : natural := 14;
-  constant SOUND_ROM_1_DATA_WIDTH : natural := 8;
-  constant SOUND_ROM_2_ADDR_WIDTH : natural := 14;
-  constant SOUND_ROM_2_DATA_WIDTH : natural := 8;
+  constant SOUND_ROM_2_ADDR_WIDTH : natural := 15;
 
   -- sound RAM
   constant SOUND_RAM_ADDR_WIDTH : natural := 11;
 
+  subtype nibble_t is std_logic_vector(3 downto 0);
   subtype byte_t is std_logic_vector(7 downto 0);
   subtype audio_t is signed(15 downto 0);
 end package common;
