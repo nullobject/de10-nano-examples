@@ -51,9 +51,9 @@ end video_gen;
 
 architecture arch of video_gen is
   -- horizontal regions
-  constant H_FRONT_PORCH : natural := 48;
+  constant H_FRONT_PORCH : natural := 40;
   constant H_RETRACE     : natural := 32;
-  constant H_BACK_PORCH  : natural := 48;
+  constant H_BACK_PORCH  : natural := 56;
   constant H_DISPLAY     : natural := 256;
   constant H_SCAN        : natural := H_FRONT_PORCH+H_RETRACE+H_BACK_PORCH+H_DISPLAY; -- 384
 
