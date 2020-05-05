@@ -24,34 +24,14 @@ use ieee.numeric_std.all;
 use ieee.math_real.all;
 
 package common is
-  -- IOCTL
-  constant IOCTL_ADDR_WIDTH : natural := 22;
-
-  -- SDRAM
-  constant SDRAM_ADDR_WIDTH      : natural := 13;
-  constant SDRAM_DATA_WIDTH      : natural := 16;
-  constant SDRAM_BANK_WIDTH      : natural := 2;
-  constant SDRAM_COL_WIDTH       : natural := 9;
-  constant SDRAM_ROW_WIDTH       : natural := 13;
-  constant SDRAM_CTRL_ADDR_WIDTH : natural := 23; -- 8Mx32-bit
-  constant SDRAM_CTRL_DATA_WIDTH : natural := 32;
-
   constant SPRITE_RAM_GPU_ADDR_WIDTH : natural := 4;
   constant SPRITE_RAM_GPU_DATA_WIDTH : natural := 64;
 
-  constant FRAME_BUFFER_ADDR_WIDTH : natural := 16;
-  constant FRAME_BUFFER_DATA_WIDTH : natural := 10;
-
-  constant MAIN_ROM_ADDR_WIDTH   : natural := 16;
-  constant MAIN_ROM_DATA_WIDTH   : natural := 8;
   constant SPRITE_ROM_ADDR_WIDTH : natural := 13; -- 128kB
   constant SPRITE_ROM_DATA_WIDTH : natural := 32;
-  constant CHAR_ROM_ADDR_WIDTH   : natural := 11; -- 32kB
-  constant CHAR_ROM_DATA_WIDTH   : natural := 8;
-  constant FG_ROM_ADDR_WIDTH     : natural := 13; -- 128kB
-  constant FG_ROM_DATA_WIDTH     : natural := 8;
-  constant BG_ROM_ADDR_WIDTH     : natural := 13; -- 128kB
-  constant BG_ROM_DATA_WIDTH     : natural := 8;
+
+  constant FRAME_BUFFER_ADDR_WIDTH : natural := 16;
+  constant FRAME_BUFFER_DATA_WIDTH : natural := 10;
 
   -- sprite byte 0
   constant SPRITE_HI_CODE_MSB : natural := 7;
