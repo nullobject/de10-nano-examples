@@ -66,7 +66,7 @@ architecture arch of sound is
   signal cpu_wr_n   : std_logic;
   signal cpu_rfsh_n : std_logic;
   signal cpu_nmi_n  : std_logic := '1';
-  signal cpu_int_n  : std_logic := '1';
+  signal opl_irq_n  : std_logic := '1';
 
   -- chip select signals
   signal sound_rom_cs : std_logic;
@@ -89,7 +89,7 @@ begin
     RESET_n     => not reset,
     CLK         => clk,
     CEN         => cen,
-    INT_n       => cpu_int_n,
+    INT_n       => opl_irq_n,
     NMI_n       => cpu_nmi_n,
     MREQ_n      => cpu_mreq_n,
     IORQ_n      => open,
@@ -127,15 +127,16 @@ begin
   );
 
   opl : entity work.opl
+  generic map (CLK_FREQ => 48.0)
   port map (
     reset  => reset,
     clk    => clk,
-    irq_n  => cpu_int_n,
-    cs     => opl_cs,
-    addr   => ('0' & cpu_addr(0)),
     din    => cpu_dout,
     dout   => opl_data,
+    cs     => opl_cs,
     we     => not cpu_wr_n,
+    a0     => cpu_addr(0),
+    irq_n  => opl_irq_n,
     sample => audio
   );
 

@@ -79,7 +79,8 @@ set_location_assignment PIN_AH16 -to key[1]
 set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to key[0]
 set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to key[1]
 
-set_global_assignment -name QIP_FILE lib/opl3/opl3.qip
+set_global_assignment -name QIP_FILE lib/opl2/opl2.qip
+# set_global_assignment -name QIP_FILE lib/opl3/opl3.qip
 set_global_assignment -name QIP_FILE lib/t80/t80.qip
 set_global_assignment -name QIP_FILE src/pll.qip
 set_global_assignment -name SDC_FILE src/top.sdc
