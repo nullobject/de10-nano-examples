@@ -39,12 +39,15 @@ use ieee.numeric_std.all;
 
 library pll;
 
+use work.common.all;
 use work.types.all;
 
 entity top is
   port (
     -- 50MHz reference clock
     clk : in std_logic;
+
+    key : in std_logic_vector(1 downto 0);
 
     -- VGA signals
     vga_r, vga_g, vga_b : out std_logic_vector(5 downto 0);
@@ -57,6 +60,14 @@ architecture arch of top is
   signal sys_clk : std_logic;
   signal cen_6   : std_logic;
 
+  -- RAM signals
+  signal ram_addr : unsigned(RAM_ADDR_WIDTH-1 downto 0);
+  signal ram_data : std_logic_vector(RAM_DATA_WIDTH-1 downto 0);
+
+  -- ROM signals
+  signal rom_addr : unsigned(ROM_ADDR_WIDTH-1 downto 0);
+  signal rom_data : std_logic_vector(ROM_DATA_WIDTH-1 downto 0);
+
   -- video signals
   signal video : video_t;
 
@@ -64,7 +75,8 @@ architecture arch of top is
   signal tilemap_data : byte_t;
 
   -- pixel data
-  signal pixel : nibble_t;
+  signal pixel : pixel_t;
+  signal pixel_reg : pixel_t;
 begin
   -- generate a 12MHz clock signal
   my_pll : entity pll.pll
@@ -81,42 +93,86 @@ begin
   generic map (DIVISOR => 8)
   port map (clk => sys_clk, cen => cen_6);
 
+  tile_ram : entity work.single_port_rom
+  generic map (
+    ADDR_WIDTH => RAM_ADDR_WIDTH,
+    DATA_WIDTH => RAM_DATA_WIDTH,
+    INIT_FILE  => "rom/tiles.mif",
+
+    -- XXX: for debugging
+    ENABLE_RUNTIME_MOD => "YES"
+  )
+  port map (
+    clk  => clk,
+    addr => ram_addr,
+    dout => ram_data
+  );
+
+  tile_rom : entity work.single_port_rom
+  generic map (
+    ADDR_WIDTH => ROM_ADDR_WIDTH,
+    DATA_WIDTH => ROM_DATA_WIDTH,
+    INIT_FILE  => "rom/cpu_8k.mif"
+  )
+  port map (
+    clk  => clk,
+    addr => rom_addr,
+    dout => rom_data
+  );
+
   -- video timing generator
-  sync_gen : entity work.sync_gen
+  video_gen : entity work.video_gen
   port map (
     clk   => sys_clk,
-    cen_6 => cen_6,
+    cen   => cen_6,
     video => video
   );
 
   -- tilemap layer
-  tilemap_layer : entity work.tilemap
+  char_layer : entity work.char_layer
+  generic map (
+    RAM_ADDR_WIDTH => RAM_ADDR_WIDTH,
+    RAM_DATA_WIDTH => RAM_DATA_WIDTH,
+    ROM_ADDR_WIDTH => ROM_ADDR_WIDTH,
+    ROM_DATA_WIDTH => ROM_DATA_WIDTH
+  )
   port map (
-    clk   => sys_clk,
+    config => DEFAULT_TILE_CONFIG,
+
+    clk => sys_clk,
+    cen => cen_6,
+
+    ram_addr => ram_addr,
+    ram_data => ram_data,
+    rom_addr => rom_addr,
+    rom_data => rom_data,
+
     video => video,
-    data  => tilemap_data
+    flip  => not key(0),
+
+    data => tilemap_data
   );
 
-  -- latch pixel data from the palette RAM
+  -- latch pixel data
   latch_pixel_data : process (sys_clk)
   begin
     if rising_edge(sys_clk) then
-        if cen_6 = '1' then
-        if video.enable = '1' then
-          vga_r <= pixel & pixel(3 downto 2);
-          vga_g <= pixel & pixel(3 downto 2);
-          vga_b <= pixel & pixel(3 downto 2);
-        else
-          vga_r <= (others => '0');
-          vga_g <= (others => '0');
-          vga_b <= (others => '0');
-        end if;
+      if cen_6 = '1' then
+        pixel_reg <= pixel;
       end if;
     end if;
   end process;
 
   -- set the pixel data
   pixel <= tilemap_data(3 downto 0);
+
+  vga_r <= "111111"                          when video.enable = '1' and ((video.pos.x(7 downto 0) = 0) or (video.pos.x(7 downto 0) = 255) or (video.pos.y(7 downto 0) = 16) or (video.pos.y(7 downto 0) = 239)) else
+           pixel_reg & pixel_reg(3 downto 2) when video.enable = '1' else
+           (others => '0');
+
+  -- vga_r <= pixel_reg & pixel_reg(3 downto 2) when video.enable = '1' else (others => '0');
+  vga_g <= pixel_reg & pixel_reg(3 downto 2) when video.enable = '1' else (others => '0');
+  vga_b <= pixel_reg & pixel_reg(3 downto 2) when video.enable = '1' else (others => '0');
 
   -- composite sync
   vga_csync <= not (video.hsync xor video.vsync);

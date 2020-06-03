@@ -36,56 +36,37 @@
 library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
+use ieee.math_real.all;
 
-package types is
-  subtype byte_t is std_logic_vector(7 downto 0);
-  subtype nibble_t is std_logic_vector(3 downto 0);
+package math is
+  -- calculates the log2 of the given number
+  function ilog2(n : natural) return natural;
 
-  -- represents a 4BPP colour value
-  subtype color_t is std_logic_vector(3 downto 0);
+  -- Masks the given range of bits for a vector.
+  --
+  -- Only the bits between the MSB and LSB (inclusive) will be kept, all other
+  -- bits will be masked out.
+  function mask_bits(data : std_logic_vector; msb : natural; lsb : natural) return std_logic_vector;
+  function mask_bits(data : std_logic_vector; msb : natural; lsb : natural; size : natural) return std_logic_vector;
+end package math;
 
-  -- represents a pixel in a 8x8 tile
-  subtype pixel_t is std_logic_vector(3 downto 0);
+package body math is
+  function ilog2(n : natural) return natural is
+  begin
+    return natural(ceil(log2(real(n))));
+  end ilog2;
 
-  -- represents a row of pixels in a 8x8 tile
-  subtype row_t is std_logic_vector(31 downto 0);
+  function mask_bits(data : std_logic_vector; msb : natural; lsb : natural) return std_logic_vector is
+    variable n : natural;
+    variable mask : std_logic_vector(data'length-1 downto 0);
+  begin
+    n := (2**(msb-lsb+1))-1;
+    mask := std_logic_vector(shift_left(to_unsigned(n, mask'length), lsb));
+    return std_logic_vector(shift_right(unsigned(data AND mask), lsb));
+  end mask_bits;
 
-  -- represents a position
-  type pos_t is record
-    x : unsigned(8 downto 0);
-    y : unsigned(8 downto 0);
-  end record pos_t;
-
-  -- represents the video signals
-  type video_t is record
-    -- position
-    pos : pos_t;
-
-    -- sync signals
-    hsync : std_logic;
-    vsync : std_logic;
-
-    -- blank signals
-    hblank : std_logic;
-    vblank : std_logic;
-
-    -- enable video output
-    enable : std_logic;
-  end record video_t;
-
-  -- tile descriptor
-  type tile_t is record
-    code  : unsigned(10 downto 0);
-    color : color_t;
-  end record tile_t;
-
-  -- tile configuration
-  type tile_config_t is record
-    hi_code_msb : natural;
-    hi_code_lsb : natural;
-    lo_code_msb : natural;
-    lo_code_lsb : natural;
-    color_msb   : natural;
-    color_lsb   : natural;
-  end record tile_config_t;
-end package types;
+  function mask_bits(data : std_logic_vector; msb : natural; lsb : natural; size : natural) return std_logic_vector is
+  begin
+    return std_logic_vector(resize(unsigned(mask_bits(data, msb, lsb)), size));
+  end mask_bits;
+end package body math;

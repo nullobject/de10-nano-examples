@@ -37,55 +37,56 @@ library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
-package types is
-  subtype byte_t is std_logic_vector(7 downto 0);
-  subtype nibble_t is std_logic_vector(3 downto 0);
+use work.math.all;
+use work.types.all;
 
-  -- represents a 4BPP colour value
-  subtype color_t is std_logic_vector(3 downto 0);
+package common is
+  constant RAM_ADDR_WIDTH : natural := 10;
+  constant RAM_DATA_WIDTH : natural := 16;
+  constant ROM_ADDR_WIDTH : natural := 13;
+  constant ROM_DATA_WIDTH : natural := 32;
 
-  -- represents a pixel in a 8x8 tile
-  subtype pixel_t is std_logic_vector(3 downto 0);
+  constant DEFAULT_TILE_CONFIG : tile_config_t := (
+    lo_code_lsb => 0,
+    lo_code_msb => 7,
+    hi_code_lsb => 8,
+    hi_code_msb => 10,
+    color_lsb   => 12,
+    color_msb   => 15
+  );
 
-  -- represents a row of pixels in a 8x8 tile
-  subtype row_t is std_logic_vector(31 downto 0);
+  -- decodes a tile from a 16-bit vector
+  function decode_tile (config : tile_config_t; data : std_logic_vector(15 downto 0)) return tile_t;
 
-  -- represents a position
-  type pos_t is record
-    x : unsigned(8 downto 0);
-    y : unsigned(8 downto 0);
-  end record pos_t;
+  -- selects a pixel from a tile row at the given offset
+  function select_pixel (row : row_t; offset : unsigned(2 downto 0)) return pixel_t;
+end package common;
 
-  -- represents the video signals
-  type video_t is record
-    -- position
-    pos : pos_t;
+package body common is
+  function decode_tile (config : tile_config_t; data : std_logic_vector(15 downto 0)) return tile_t is
+    variable hi_code : std_logic_vector(2 downto 0);
+    variable lo_code : byte_t;
+  begin
+    hi_code := mask_bits(data, config.hi_code_msb, config.hi_code_lsb, 3);
+    lo_code := mask_bits(data, config.lo_code_msb, config.lo_code_lsb, 8);
 
-    -- sync signals
-    hsync : std_logic;
-    vsync : std_logic;
+    return (
+      code  => unsigned(hi_code & lo_code),
+      color => mask_bits(data, config.color_msb, config.color_lsb, 4)
+    );
+  end decode_tile;
 
-    -- blank signals
-    hblank : std_logic;
-    vblank : std_logic;
-
-    -- enable video output
-    enable : std_logic;
-  end record video_t;
-
-  -- tile descriptor
-  type tile_t is record
-    code  : unsigned(10 downto 0);
-    color : color_t;
-  end record tile_t;
-
-  -- tile configuration
-  type tile_config_t is record
-    hi_code_msb : natural;
-    hi_code_lsb : natural;
-    lo_code_msb : natural;
-    lo_code_lsb : natural;
-    color_msb   : natural;
-    color_lsb   : natural;
-  end record tile_config_t;
-end package types;
+  function select_pixel (row : row_t; offset : unsigned(2 downto 0)) return pixel_t is
+  begin
+    case offset is
+      when "000" => return row(31 downto 28);
+      when "001" => return row(27 downto 24);
+      when "010" => return row(23 downto 20);
+      when "011" => return row(19 downto 16);
+      when "100" => return row(15 downto 12);
+      when "101" => return row(11 downto 8);
+      when "110" => return row(7 downto 4);
+      when "111" => return row(3 downto 0);
+    end case;
+  end select_pixel;
+end package body common;
