@@ -52,12 +52,15 @@ entity char_layer is
     ROM_DATA_WIDTH : natural
   );
   port (
-    -- configuration
-    config : in tile_config_t;
-
     -- clock signals
     clk : in std_logic;
     cen : in std_logic;
+
+    -- configuration
+    config : in tile_config_t;
+
+    -- flip screen
+    flip : in std_logic;
 
     -- char RAM
     ram_addr : out unsigned(RAM_ADDR_WIDTH-1 downto 0);
@@ -69,8 +72,6 @@ entity char_layer is
 
     -- video signals
     video : in video_t;
-
-    flip : in std_logic;
 
     -- graphics data
     data : out byte_t
@@ -84,15 +85,17 @@ architecture arch of char_layer is
   signal pixel    : pixel_t;
   signal tile_row : row_t;
 
+  -- direction signal
   signal dir : integer;
-  signal flip_x : unsigned(7 downto 0);
-  signal flip_y : unsigned(7 downto 0);
+
+  -- destination position
+  signal dest_pos : pos_t;
 
   -- aliases to extract the components of the horizontal and vertical position
-  alias col      : unsigned(4 downto 0) is flip_x(7 downto 3);
-  alias row      : unsigned(4 downto 0) is flip_y(7 downto 3);
-  alias offset_x : unsigned(2 downto 0) is flip_x(2 downto 0);
-  alias offset_y : unsigned(2 downto 0) is flip_y(2 downto 0);
+  alias col      : unsigned(4 downto 0) is dest_pos.x(7 downto 3);
+  alias row      : unsigned(4 downto 0) is dest_pos.y(7 downto 3);
+  alias offset_x : unsigned(2 downto 0) is dest_pos.x(2 downto 0);
+  alias offset_y : unsigned(2 downto 0) is dest_pos.y(2 downto 0);
 begin
   -- Load tile data from the character RAM.
   --
@@ -131,12 +134,18 @@ begin
     end if;
   end process;
 
+  -- direction of next pixel (i.e. positive for normal, negative for flipped)
   dir <= -1 when flip = '1' else 1;
 
-  flip_x <= (not video.pos.x(7 downto 0)) when flip = '1' else video.pos.x(7 downto 0);
-  flip_y <= (not video.pos.y(7 downto 0)) when flip = '1' else video.pos.y(7 downto 0);
+  -- Set the destination postion
+  --
+  -- The video position is inverted when the screen is flipped.
+  dest_pos.x <= ('0' & not video.pos.x(7 downto 0)) when flip = '1' else
+                ('0' & video.pos.x(7 downto 0));
+  dest_pos.y <= ('0' & not video.pos.y(7 downto 0)) when flip = '1' else
+                ('0' & video.pos.y(7 downto 0));
 
-  -- Set the tile ROM address.
+  -- Set the tile ROM address
   --
   -- This address points to a row of an 8x8 tile.
   rom_addr <= tile.code(9 downto 0) & offset_y(2 downto 0);
