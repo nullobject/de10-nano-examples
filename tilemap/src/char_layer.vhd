@@ -78,23 +78,21 @@ entity char_layer is
 end char_layer;
 
 architecture arch of char_layer is
-  -- represents the position of a pixel in a 8x8 tile
-  type tile_pos_t is record
-    x : unsigned(2 downto 0);
-    y : unsigned(2 downto 0);
-  end record tile_pos_t;
-
   -- tile signals
   signal tile     : tile_t;
   signal color    : color_t;
   signal pixel    : pixel_t;
   signal tile_row : row_t;
 
+  signal dir : integer;
+  signal flip_x : unsigned(7 downto 0);
+  signal flip_y : unsigned(7 downto 0);
+
   -- aliases to extract the components of the horizontal and vertical position
-  alias col      : unsigned(4 downto 0) is video.pos.x(7 downto 3);
-  alias row      : unsigned(4 downto 0) is video.pos.y(7 downto 3);
-  alias offset_x : unsigned(2 downto 0) is video.pos.x(2 downto 0);
-  alias offset_y : unsigned(2 downto 0) is video.pos.y(2 downto 0);
+  alias col      : unsigned(4 downto 0) is flip_x(7 downto 3);
+  alias row      : unsigned(4 downto 0) is flip_y(7 downto 3);
+  alias offset_x : unsigned(2 downto 0) is flip_x(2 downto 0);
+  alias offset_y : unsigned(2 downto 0) is flip_y(2 downto 0);
 begin
   -- Load tile data from the character RAM.
   --
@@ -111,10 +109,10 @@ begin
   begin
     if rising_edge(clk) then
       if cen = '1' then
-        case to_integer(offset_x) is
+        case to_integer(video.pos.x(2 downto 0)) is
           when 0 =>
             -- load the next tile
-            ram_addr <= row & (col+1);
+            ram_addr <= row & (col+dir);
 
           when 1 =>
             -- latch tile
@@ -133,13 +131,18 @@ begin
     end if;
   end process;
 
+  dir <= -1 when flip = '1' else 1;
+
+  flip_x <= (not video.pos.x(7 downto 0)) when flip = '1' else video.pos.x(7 downto 0);
+  flip_y <= (not video.pos.y(7 downto 0)) when flip = '1' else video.pos.y(7 downto 0);
+
   -- Set the tile ROM address.
   --
   -- This address points to a row of an 8x8 tile.
   rom_addr <= tile.code(9 downto 0) & offset_y(2 downto 0);
 
   -- select the next pixel from the tile row data
-  pixel <= select_pixel(tile_row, offset_x+1);
+  pixel <= select_pixel(tile_row, offset_x+dir);
 
   -- set graphics data
   data <= color & pixel;
