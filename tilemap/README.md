@@ -9,3 +9,7 @@ Compiling:
 Programming:
 
     $ make program
+
+Generate MIF files:
+
+    $ srec_cat cpu_8k.bin -binary -o cpu_8k.mif -mif

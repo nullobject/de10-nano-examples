@@ -36,57 +36,37 @@
 library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
+use ieee.math_real.all;
 
-library altera_mf;
-use altera_mf.altera_mf_components.all;
+package math is
+  -- calculates the log2 of the given number
+  function ilog2(n : natural) return natural;
 
-entity single_port_rom is
-  generic (
-    ADDR_WIDTH         : natural := 8;
-    DATA_WIDTH         : natural := 8;
-    INIT_FILE          : string := "";
-    ENABLE_RUNTIME_MOD : string := "NO"
-  );
-  port (
-    -- clock
-    clk : in std_logic;
+  -- Masks the given range of bits for a vector.
+  --
+  -- Only the bits between the MSB and LSB (inclusive) will be kept, all other
+  -- bits will be masked out.
+  function mask_bits(data : std_logic_vector; msb : natural; lsb : natural) return std_logic_vector;
+  function mask_bits(data : std_logic_vector; msb : natural; lsb : natural; size : natural) return std_logic_vector;
+end package math;
 
-    -- chip select
-    cs : in std_logic := '1';
+package body math is
+  function ilog2(n : natural) return natural is
+  begin
+    return natural(ceil(log2(real(n))));
+  end ilog2;
 
-    -- address
-    addr : in unsigned(ADDR_WIDTH-1 downto 0);
+  function mask_bits(data : std_logic_vector; msb : natural; lsb : natural) return std_logic_vector is
+    variable n : natural;
+    variable mask : std_logic_vector(data'length-1 downto 0);
+  begin
+    n := (2**(msb-lsb+1))-1;
+    mask := std_logic_vector(shift_left(to_unsigned(n, mask'length), lsb));
+    return std_logic_vector(shift_right(unsigned(data AND mask), lsb));
+  end mask_bits;
 
-    -- data out
-    dout : out std_logic_vector(DATA_WIDTH-1 downto 0)
-  );
-end single_port_rom;
-
-architecture arch of single_port_rom is
-  signal q : std_logic_vector(DATA_WIDTH-1 downto 0);
-begin
-  altsyncram_component : altsyncram
-  generic map (
-    address_aclr_a         => "NONE",
-    clock_enable_input_a   => "BYPASS",
-    clock_enable_output_a  => "BYPASS",
-    init_file              => INIT_FILE,
-    intended_device_family => "Cyclone V",
-    lpm_hint               => "ENABLE_RUNTIME_MOD=" & ENABLE_RUNTIME_MOD,
-    lpm_type               => "altsyncram",
-    numwords_a             => 2**ADDR_WIDTH,
-    operation_mode         => "ROM",
-    outdata_aclr_a         => "NONE",
-    outdata_reg_a          => "UNREGISTERED",
-    width_a                => DATA_WIDTH,
-    width_byteena_a        => 1,
-    widthad_a              => ADDR_WIDTH
-  )
-  port map (
-    address_a => std_logic_vector(addr),
-    clock0    => clk,
-    q_a       => q
-  );
-
-  dout <= q when cs = '1' else (others => '0');
-end architecture arch;
+  function mask_bits(data : std_logic_vector; msb : natural; lsb : natural; size : natural) return std_logic_vector is
+  begin
+    return std_logic_vector(resize(unsigned(mask_bits(data, msb, lsb)), size));
+  end mask_bits;
+end package body math;

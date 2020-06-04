@@ -40,7 +40,7 @@ set_global_assignment -name FAMILY "Cyclone V"
 set_global_assignment -name DEVICE 5CSEBA6U23I7
 set_global_assignment -name ORIGINAL_QUARTUS_VERSION 18.1.0
 set_global_assignment -name PROJECT_CREATION_TIME_DATE "16:15:06  JUNE 21, 2019"
-set_global_assignment -name LAST_QUARTUS_VERSION "18.1.0 Lite Edition"
+set_global_assignment -name LAST_QUARTUS_VERSION "19.1.0 Lite Edition"
 set_global_assignment -name NUM_PARALLEL_PROCESSORS ALL
 
 set_global_assignment -name MIN_CORE_JUNCTION_TEMP "-40"
@@ -49,6 +49,11 @@ set_global_assignment -name ERROR_CHECK_FREQUENCY_DIVISOR 256
 
 set_location_assignment PIN_V11 -to clk
 set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to clk
+
+set_location_assignment PIN_AH17 -to key[0]
+set_location_assignment PIN_AH16 -to key[1]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to key[0]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to key[1]
 
 set_location_assignment PIN_AE17 -to vga_r[0]
 set_location_assignment PIN_AE20 -to vga_r[1]
@@ -77,17 +82,15 @@ set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to vga_*
 set_instance_assignment -name CURRENT_STRENGTH_NEW 8MA -to vga_*
 
 set_global_assignment -name PROJECT_OUTPUT_DIRECTORY output_files
+set_global_assignment -name QIP_FILE src/pll.qip
+set_global_assignment -name SDC_FILE src/tilemap.sdc
+set_global_assignment -name SIP_FILE src/pll.sip
 set_global_assignment -name TOP_LEVEL_ENTITY top
+set_global_assignment -name VHDL_FILE src/char_layer.vhd
 set_global_assignment -name VHDL_FILE src/clock_divider.vhd
-set_global_assignment -name VHDL_FILE src/sync_gen.vhd
-set_global_assignment -name VHDL_FILE src/tilemap.vhd
+set_global_assignment -name VHDL_FILE src/common.vhd
+set_global_assignment -name VHDL_FILE src/math.vhd
+set_global_assignment -name VHDL_FILE src/single_port_rom.vhd
 set_global_assignment -name VHDL_FILE src/top.vhd
 set_global_assignment -name VHDL_FILE src/types.vhd
-set_global_assignment -name VHDL_FILE src/single_port_rom.vhd
-set_global_assignment -name SDC_FILE src/tilemap.sdc
-set_global_assignment -name QIP_FILE src/pll.qip
-set_global_assignment -name SIP_FILE src/pll.sip
-set_global_assignment -name PARTITION_NETLIST_TYPE SOURCE -section_id Top
-set_global_assignment -name PARTITION_FITTER_PRESERVATION_LEVEL PLACEMENT_AND_ROUTING -section_id Top
-set_global_assignment -name PARTITION_COLOR 16764057 -section_id Top
-set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top
+set_global_assignment -name VHDL_FILE src/video_gen.vhd

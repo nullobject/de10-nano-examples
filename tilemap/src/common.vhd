@@ -37,56 +37,56 @@ library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
-library altera_mf;
-use altera_mf.altera_mf_components.all;
+use work.math.all;
+use work.types.all;
 
-entity single_port_rom is
-  generic (
-    ADDR_WIDTH         : natural := 8;
-    DATA_WIDTH         : natural := 8;
-    INIT_FILE          : string := "";
-    ENABLE_RUNTIME_MOD : string := "NO"
-  );
-  port (
-    -- clock
-    clk : in std_logic;
+package common is
+  constant RAM_ADDR_WIDTH : natural := 10;
+  constant RAM_DATA_WIDTH : natural := 16;
+  constant ROM_ADDR_WIDTH : natural := 13;
+  constant ROM_DATA_WIDTH : natural := 32;
 
-    -- chip select
-    cs : in std_logic := '1';
-
-    -- address
-    addr : in unsigned(ADDR_WIDTH-1 downto 0);
-
-    -- data out
-    dout : out std_logic_vector(DATA_WIDTH-1 downto 0)
-  );
-end single_port_rom;
-
-architecture arch of single_port_rom is
-  signal q : std_logic_vector(DATA_WIDTH-1 downto 0);
-begin
-  altsyncram_component : altsyncram
-  generic map (
-    address_aclr_a         => "NONE",
-    clock_enable_input_a   => "BYPASS",
-    clock_enable_output_a  => "BYPASS",
-    init_file              => INIT_FILE,
-    intended_device_family => "Cyclone V",
-    lpm_hint               => "ENABLE_RUNTIME_MOD=" & ENABLE_RUNTIME_MOD,
-    lpm_type               => "altsyncram",
-    numwords_a             => 2**ADDR_WIDTH,
-    operation_mode         => "ROM",
-    outdata_aclr_a         => "NONE",
-    outdata_reg_a          => "UNREGISTERED",
-    width_a                => DATA_WIDTH,
-    width_byteena_a        => 1,
-    widthad_a              => ADDR_WIDTH
-  )
-  port map (
-    address_a => std_logic_vector(addr),
-    clock0    => clk,
-    q_a       => q
+  constant DEFAULT_TILE_CONFIG : tile_config_t := (
+    lo_code_lsb => 0,
+    lo_code_msb => 7,
+    hi_code_lsb => 8,
+    hi_code_msb => 10,
+    color_lsb   => 12,
+    color_msb   => 15
   );
 
-  dout <= q when cs = '1' else (others => '0');
-end architecture arch;
+  -- decodes a tile from a 16-bit vector
+  function decode_tile (config : tile_config_t; data : std_logic_vector(15 downto 0)) return tile_t;
+
+  -- selects a pixel from a tile row at the given offset
+  function select_pixel (row : row_t; offset : unsigned(2 downto 0)) return pixel_t;
+end package common;
+
+package body common is
+  function decode_tile (config : tile_config_t; data : std_logic_vector(15 downto 0)) return tile_t is
+    variable hi_code : std_logic_vector(2 downto 0);
+    variable lo_code : byte_t;
+  begin
+    hi_code := mask_bits(data, config.hi_code_msb, config.hi_code_lsb, 3);
+    lo_code := mask_bits(data, config.lo_code_msb, config.lo_code_lsb, 8);
+
+    return (
+      code  => unsigned(hi_code & lo_code),
+      color => mask_bits(data, config.color_msb, config.color_lsb, 4)
+    );
+  end decode_tile;
+
+  function select_pixel (row : row_t; offset : unsigned(2 downto 0)) return pixel_t is
+  begin
+    case offset is
+      when "000" => return row(31 downto 28);
+      when "001" => return row(27 downto 24);
+      when "010" => return row(23 downto 20);
+      when "011" => return row(19 downto 16);
+      when "100" => return row(15 downto 12);
+      when "101" => return row(11 downto 8);
+      when "110" => return row(7 downto 4);
+      when "111" => return row(3 downto 0);
+    end case;
+  end select_pixel;
+end package body common;
