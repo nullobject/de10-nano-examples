@@ -86,10 +86,13 @@ set_global_assignment -name QIP_FILE src/pll.qip
 set_global_assignment -name SDC_FILE src/tilemap.sdc
 set_global_assignment -name SIP_FILE src/pll.sip
 set_global_assignment -name TOP_LEVEL_ENTITY top
-set_global_assignment -name VHDL_FILE src/char_layer.vhd
 set_global_assignment -name VHDL_FILE src/clock_divider.vhd
 set_global_assignment -name VHDL_FILE src/common.vhd
+set_global_assignment -name VHDL_FILE src/dual_port_ram.vhd
+set_global_assignment -name VHDL_FILE src/edge_detector.vhd
+set_global_assignment -name VHDL_FILE src/line_buffer.vhd
 set_global_assignment -name VHDL_FILE src/math.vhd
+set_global_assignment -name VHDL_FILE src/scroll_layer.vhd
 set_global_assignment -name VHDL_FILE src/single_port_rom.vhd
 set_global_assignment -name VHDL_FILE src/top.vhd
 set_global_assignment -name VHDL_FILE src/types.vhd

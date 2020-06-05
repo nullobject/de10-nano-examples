@@ -59,6 +59,7 @@ architecture arch of top is
   -- clock signals
   signal sys_clk : std_logic;
   signal cen_6   : std_logic;
+  signal cen_cnt : std_logic;
 
   -- RAM signals
   signal ram_addr : unsigned(RAM_ADDR_WIDTH-1 downto 0);
@@ -77,6 +78,14 @@ architecture arch of top is
   -- pixel data
   signal pixel : pixel_t;
   signal pixel_reg : pixel_t;
+
+  signal flip     : std_logic;
+  signal flip_reg : std_logic := '0';
+
+  signal stop     : std_logic;
+  signal stop_reg : std_logic := '0';
+
+  signal counter : unsigned(8 downto 0);
 begin
   -- generate a 12MHz clock signal
   my_pll : entity pll.pll
@@ -92,6 +101,27 @@ begin
   clock_divider_6 : entity work.clock_divider
   generic map (DIVISOR => 8)
   port map (clk => sys_clk, cen => cen_6);
+
+  -- generate a 10Hz clock enable signal
+  clock_divider_cnt : entity work.clock_divider
+  generic map (DIVISOR => 5000000)
+  port map (clk => sys_clk, cen => cen_cnt);
+
+  flip_detector : entity work.edge_detector
+  generic map (RISING => true)
+  port map (
+    clk  => sys_clk,
+    data => not key(0),
+    q    => flip
+  );
+
+  stop_detector : entity work.edge_detector
+  generic map (RISING => true)
+  port map (
+    clk  => sys_clk,
+    data => not key(1),
+    q    => stop
+  );
 
   tile_ram : entity work.single_port_rom
   generic map (
@@ -112,7 +142,7 @@ begin
   generic map (
     ADDR_WIDTH => ROM_ADDR_WIDTH,
     DATA_WIDTH => ROM_DATA_WIDTH,
-    INIT_FILE  => "rom/cpu_8k.mif"
+    INIT_FILE  => "rom/fg.mif"
   )
   port map (
     clk  => clk,
@@ -128,8 +158,7 @@ begin
     video => video
   );
 
-  -- tilemap layer
-  char_layer : entity work.char_layer
+  scroll_layer : entity work.scroll_layer
   generic map (
     RAM_ADDR_WIDTH => RAM_ADDR_WIDTH,
     RAM_DATA_WIDTH => RAM_DATA_WIDTH,
@@ -142,16 +171,48 @@ begin
     clk => sys_clk,
     cen => cen_6,
 
+    flip  => flip_reg,
+
     ram_addr => ram_addr,
     ram_data => ram_data,
     rom_addr => rom_addr,
     rom_data => rom_data,
 
     video => video,
-    flip  => not key(0),
+
+    scroll_pos => (x => counter, y => (others => '0')),
 
     data => tilemap_data
   );
+
+  inc_counter : process (sys_clk)
+  begin
+    if rising_edge(sys_clk) then
+      if stop_reg = '1' then
+        counter <= (others => '0');
+      elsif cen_cnt = '1' then
+        counter <= counter + 1;
+      end if;
+    end if;
+  end process;
+
+  latch_flip : process (sys_clk)
+  begin
+    if rising_edge(sys_clk) then
+      if flip = '1' then
+        flip_reg <= not flip_reg;
+      end if;
+    end if;
+  end process;
+
+  latch_stop : process (sys_clk)
+  begin
+    if rising_edge(sys_clk) then
+      if stop = '1' then
+        stop_reg <= not stop_reg;
+      end if;
+    end if;
+  end process;
 
   -- latch pixel data
   latch_pixel_data : process (sys_clk)
@@ -166,11 +227,7 @@ begin
   -- set the pixel data
   pixel <= tilemap_data(3 downto 0);
 
-  vga_r <= "111111"                          when video.enable = '1' and ((video.pos.x(7 downto 0) = 0) or (video.pos.x(7 downto 0) = 255) or (video.pos.y(7 downto 0) = 16) or (video.pos.y(7 downto 0) = 239)) else
-           pixel_reg & pixel_reg(3 downto 2) when video.enable = '1' else
-           (others => '0');
-
-  -- vga_r <= pixel_reg & pixel_reg(3 downto 2) when video.enable = '1' else (others => '0');
+  vga_r <= pixel_reg & pixel_reg(3 downto 2) when video.enable = '1' else (others => '0');
   vga_g <= pixel_reg & pixel_reg(3 downto 2) when video.enable = '1' else (others => '0');
   vga_b <= pixel_reg & pixel_reg(3 downto 2) when video.enable = '1' else (others => '0');
 
