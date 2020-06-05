@@ -38,13 +38,22 @@ use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
 use work.common.all;
+use work.math.all;
 use work.types.all;
 
--- The character layer is the part of the graphics pipeline that handles things
--- like the logo, score, playfield, and other static graphics.
+-- The scroll module handles the scrolling foreground and background layers in
+-- the graphics pipeline.
 --
--- It consists of a 32x32 grid of 8x8 tiles.
-entity char_layer is
+-- It consists of a 32x16 grid of 16x16 tiles. Each 16x16 tile is made up of
+-- four separate 8x8 tiles, stored in a left-to-right, top-to-bottom order.
+--
+-- Each tile in the tilemap is represented by two bytes in the scroll RAM,
+-- a high byte and a low byte, which contains the tile colour and code.
+--
+-- Because a scrolling layer is twice the width of the screen, it can never be
+-- entirely visible on the screen at once. The horizontal and vertical scroll
+-- positions are used to set the position of the visible area.
+entity scroll_layer is
   generic (
     RAM_ADDR_WIDTH : natural;
     RAM_DATA_WIDTH : natural;
@@ -62,7 +71,7 @@ entity char_layer is
     -- flip screen
     flip : in std_logic;
 
-    -- char RAM
+    -- scroll RAM
     ram_addr : out unsigned(RAM_ADDR_WIDTH-1 downto 0);
     ram_data : in std_logic_vector(RAM_DATA_WIDTH-1 downto 0);
 
@@ -73,31 +82,78 @@ entity char_layer is
     -- video signals
     video : in video_t;
 
+    -- scroll position
+    scroll_pos : in pos_t;
+
     -- graphics data
     data : out byte_t
   );
-end char_layer;
+end scroll_layer;
 
-architecture arch of char_layer is
+architecture arch of scroll_layer is
+  constant LINE_BUFFER_ADDR_WIDTH : natural := 8;
+  constant LINE_BUFFER_DATA_WIDTH : natural := 8;
+
   -- tile signals
   signal tile     : tile_t;
   signal color    : color_t;
   signal pixel    : pixel_t;
   signal tile_row : row_t;
 
-  -- direction signal
-  signal dir : integer;
+  -- line buffer
+  signal line_buffer_swap   : std_logic;
+  signal line_buffer_addr_a : unsigned(LINE_BUFFER_ADDR_WIDTH-1 downto 0);
+  signal line_buffer_din_a  : std_logic_vector(LINE_BUFFER_DATA_WIDTH-1 downto 0);
+  signal line_buffer_we_a   : std_logic;
+  signal line_buffer_addr_b : unsigned(LINE_BUFFER_ADDR_WIDTH-1 downto 0);
+  signal line_buffer_dout_b : std_logic_vector(LINE_BUFFER_DATA_WIDTH-1 downto 0);
 
   -- destination position
   signal dest_pos : pos_t;
 
+  signal flip_y : unsigned(7 downto 0);
+
   -- aliases to extract the components of the horizontal and vertical position
-  alias col      : unsigned(4 downto 0) is dest_pos.x(7 downto 3);
-  alias row      : unsigned(4 downto 0) is dest_pos.y(7 downto 3);
-  alias offset_x : unsigned(2 downto 0) is dest_pos.x(2 downto 0);
-  alias offset_y : unsigned(2 downto 0) is dest_pos.y(2 downto 0);
+  alias col      : unsigned(4 downto 0) is dest_pos.x(8 downto 4);
+  alias row      : unsigned(3 downto 0) is dest_pos.y(7 downto 4);
+  alias offset_x : unsigned(3 downto 0) is dest_pos.x(3 downto 0);
+  alias offset_y : unsigned(3 downto 0) is dest_pos.y(3 downto 0);
 begin
-  -- Load tile data from the character RAM.
+  line_buffer : entity work.line_buffer
+  generic map (
+    ADDR_WIDTH => LINE_BUFFER_ADDR_WIDTH,
+    DATA_WIDTH => LINE_BUFFER_DATA_WIDTH
+  )
+  port map (
+    clk   => clk,
+
+    swap => line_buffer_swap,
+
+    -- port A (write)
+    addr_a => line_buffer_addr_a,
+    din_a  => line_buffer_din_a,
+    we_a   => line_buffer_we_a,
+
+    -- port B (read)
+    addr_b => line_buffer_addr_b,
+    dout_b => line_buffer_dout_b
+  );
+
+  -- update position counter
+  update_pos_counter : process (clk)
+  begin
+    if rising_edge(clk) then
+      if cen = '1' then
+        if video.hsync = '1' then
+          dest_pos.x <= scroll_pos.x;
+        else
+          dest_pos.x <= dest_pos.x+1;
+        end if;
+      end if;
+    end if;
+  end process;
+
+  -- Load tile data from the scroll RAM.
   --
   -- While the current tile is being rendered, we need to fetch data for the
   -- next tile ahead, so that it is loaded in time to render it on the screen.
@@ -112,17 +168,21 @@ begin
   begin
     if rising_edge(clk) then
       if cen = '1' then
-        case to_integer(video.pos.x(2 downto 0)) is
-          when 0 =>
-            -- load the next tile
-            ram_addr <= row & (col+dir);
+        case to_integer(offset_x) is
+          when 7 =>
+            -- latch row data
+            tile_row <= rom_data;
 
-          when 1 =>
+          when 8 =>
+            -- load next tile
+            ram_addr <= row & (col+1);
+
+          when 9 =>
             -- latch tile
             tile <= decode_tile(config, ram_data);
 
-          when 6 =>
-            -- latch the row data
+          when 15 =>
+            -- latch row data
             tile_row <= rom_data;
 
             -- latch tile color
@@ -134,25 +194,30 @@ begin
     end if;
   end process;
 
-  -- direction of next pixel (i.e. positive for normal, negative for flipped)
-  dir <= -1 when flip = '1' else 1;
+  -- set flipped vertical position one line ahead/behind
+  flip_y <= (not video.pos.y(7 downto 0))-1 when flip = '1' else
+            video.pos.y(7 downto 0)+1;
 
-  -- Set the destination postion
-  --
-  -- The video position is inverted when the screen is flipped.
-  dest_pos.x <= ('0' & not video.pos.x(7 downto 0)) when flip = '1' else
-                ('0' & video.pos.x(7 downto 0));
-  dest_pos.y <= ('0' & not video.pos.y(7 downto 0)) when flip = '1' else
-                ('0' & video.pos.y(7 downto 0));
+  -- set vertical position
+  dest_pos.y <= resize(scroll_pos.y+flip_y, dest_pos.y'length);
 
-  -- Set the tile ROM address
-  --
-  -- This address points to a row of an 8x8 tile.
-  rom_addr <= tile.code(9 downto 0) & offset_y(2 downto 0);
+  -- set tile ROM address
+  rom_addr <= tile.code & offset_y(3) & (not offset_x(3)) & offset_y(2 downto 0);
 
-  -- select the next pixel from the tile row data
-  pixel <= select_pixel(tile_row, offset_x+dir);
+  -- select pixel from the tile row data
+  pixel <= select_pixel(tile_row, offset_x(2 downto 0));
+
+  -- swap line buffer on alternating rows
+  line_buffer_swap <= video.pos.y(0);
+
+  -- write line buffer
+  line_buffer_addr_a <= not video.pos.x(7 downto 0) when flip = '1' else video.pos.x(7 downto 0);
+  line_buffer_din_a  <= color & pixel;
+  line_buffer_we_a   <= not video.hblank;
+
+  -- read line buffer one pixel ahead
+  line_buffer_addr_b <= video.pos.x(7 downto 0)+1;
 
   -- set graphics data
-  data <= color & pixel;
+  data <= line_buffer_dout_b;
 end architecture arch;

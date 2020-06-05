@@ -41,9 +41,11 @@ use work.math.all;
 use work.types.all;
 
 package common is
-  constant RAM_ADDR_WIDTH : natural := 10;
+  constant RAM_ADDR_WIDTH : natural := 9;
   constant RAM_DATA_WIDTH : natural := 16;
-  constant ROM_ADDR_WIDTH : natural := 13;
+  -- constant ROM_ADDR_WIDTH : natural := 13;
+  -- constant ROM_DATA_WIDTH : natural := 32;
+  constant ROM_ADDR_WIDTH : natural := 16;
   constant ROM_DATA_WIDTH : natural := 32;
 
   constant DEFAULT_TILE_CONFIG : tile_config_t := (
