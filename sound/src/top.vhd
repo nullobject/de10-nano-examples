@@ -59,10 +59,8 @@ architecture arch of top is
   signal sys_clk : std_logic;
   signal cen_4   : std_logic;
 
-  signal req : std_logic;
-
   signal snd_req   : std_logic;
-  signal snd_data  : byte_t;
+  signal snd_data  : unsigned(7 downto 0);
   signal snd_audio : audio_t;
 
   signal audio : std_logic;
@@ -90,20 +88,12 @@ begin
     rout => reset
   );
 
-  -- generate a request pulse after powering on, or when KEY1 is pressed
-  req_gen : entity work.reset_gen
-  port map (
-    clk  => sys_clk,
-    rin  => not key(1),
-    rout => req
-  );
-
   -- detect rising edges of the req signal
   req_edge_detector : entity work.edge_detector
   generic map (RISING => true)
   port map (
     clk  => sys_clk,
-    data => req,
+    data => not key(1),
     q    => snd_req
   );
 
@@ -113,7 +103,7 @@ begin
     clk   => sys_clk,
     cen   => cen_4,
     req   => snd_req,
-    data  => snd_data,
+    data  => std_logic_vector(snd_data),
     audio => snd_audio
   );
 
@@ -127,7 +117,16 @@ begin
     q     => audio
   );
 
-  snd_data <= x"32";
+  nmi : process (clk, reset)
+  begin
+    if reset = '1' then
+      snd_data <= x"32";
+    elsif rising_edge(clk) then
+      if snd_req = '1' then
+        snd_data <= snd_data + 1;
+      end if;
+    end if;
+  end process;
 
   audio_l <= audio;
   audio_r <= audio;
