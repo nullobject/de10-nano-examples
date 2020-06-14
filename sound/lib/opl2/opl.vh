@@ -62,10 +62,10 @@
 `define OP_SNARE_DRUM 4
 `define OP_TOP_CYMBAL 5
 
-`define SAMPLE_CLK_FREQ 0.0497159  // MHz
+`define SAMPLE_CLK_FREQ 0.055  // MHz
 
-`define TIMER1_TICK_INTERVAL 80  // nanoseconds
-`define TIMER2_TICK_INTERVAL 320 // nanoseconds
+`define TIMER1_TICK_INTERVAL 72  // microseconds
+`define TIMER2_TICK_INTERVAL 320 // microseconds
 
 `define CLOG2(x) \
   (x <= 2) ? 1 : (\
