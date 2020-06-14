@@ -112,7 +112,7 @@ begin
   generic map (WIDTH => 16)
   port map (
     reset => reset,
-    clk   => clk,
+    clk   => sys_clk,
     data  => (not snd_audio(15)) & snd_audio(14 downto 0),
     q     => audio
   );
