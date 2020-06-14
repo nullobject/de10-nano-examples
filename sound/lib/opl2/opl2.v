@@ -693,14 +693,22 @@ localparam integer TIMER1_MAX = CLK_FREQ*`TIMER1_TICK_INTERVAL;
 localparam integer TIMER2_MAX = CLK_FREQ*`TIMER2_TICK_INTERVAL;
 
 wire timer1_pulse;
-timer timer1(clk, TIMER1_MAX, timer1_preset, timer1_active, timer1_pulse);
+
+timer #(
+  .MAX_VALUE(TIMER1_MAX)
+) timer1(
+  .clk(clk),
+  .init(timer1_preset),
+  .start(timer1_active),
+  .overflow(timer1_pulse)
+);
 
 reg timer1_overflow;
 always @(posedge clk, posedge rst) begin
   if (rst) timer1_overflow <= 0;
   else begin
     if (reg_write && index == 4 && din[7]) timer1_overflow <= 0;
-    if (timer1_pulse)                 						 timer1_overflow <= 1;
+    if (timer1_pulse)                 		 timer1_overflow <= 1;
   end
 end
 
@@ -721,14 +729,20 @@ always @(posedge clk, posedge rst) begin
 end
 
 wire timer2_pulse;
-timer timer2(clk, TIMER2_MAX, timer2_preset, timer2_active, timer2_pulse);
+
+timer #(.MAX_VALUE(TIMER2_MAX)) timer2 (
+  .clk(clk),
+  .init(timer2_preset),
+  .start(timer2_active),
+  .overflow(timer2_pulse)
+);
 
 reg timer2_overflow;
 always @(posedge clk, posedge rst) begin
   if (rst) timer2_overflow <= 0;
   else begin
     if (reg_write && index == 4 && din[7]) timer2_overflow <= 0;
-    if (timer2_pulse)                              timer2_overflow <= 1;
+    if (timer2_pulse)                      timer2_overflow <= 1;
   end
 end
 
@@ -739,43 +753,8 @@ always @(posedge clk, posedge rst) begin
   if (rst) irq_n <= 1;
   else begin
     if (reg_write && index == 4 && din[7]) irq_n <= 1;
-    if (~timer1_mask && timer1_pulse)              irq_n <= 0;
-    if (~timer2_mask && timer2_pulse)              irq_n <= 0;
-  end
-end
-
-endmodule
-
-module timer(
-input         clk,
-input  [14:0] resolution,
-input   [7:0] init,
-input         active,
-output reg    overflow_pulse
-);
-
-always @(posedge clk) begin
-  reg  [7:0] counter     = 0;
-  reg [14:0] sub_counter = 0;
-  reg        old_act;
-
-  old_act <= active;
-  overflow_pulse <= 0;
-
-  if (~old_act && active) begin
-    counter <= init;
-    sub_counter <= resolution;
-  end
-  else if (active) begin
-    sub_counter <= sub_counter - 1'd1;
-    if (!sub_counter) begin
-      sub_counter <= resolution;
-      counter     <= counter + 1'd1;
-      if (&counter) begin
-        overflow_pulse <= 1;
-        counter <= init;
-      end
-    end
+    if (~timer1_mask && timer1_pulse)      irq_n <= 0;
+    if (~timer2_mask && timer2_pulse)      irq_n <= 0;
   end
 end
 

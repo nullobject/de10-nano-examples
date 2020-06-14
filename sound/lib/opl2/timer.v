@@ -38,17 +38,15 @@
 `include "opl.vh"
 
 module timer #(
-  parameter TICK_TIMER_COUNT_VALUE // seconds
+  parameter MAX_VALUE // ticks
 ) (
   input wire clk,
   input wire [`REG_TIMER_WIDTH-1:0] init,
   input wire start,
-  output wire overflow
+  output reg overflow
 );
-  wire tick_pulse;
-  wire start_pulse;
-  reg [`CLOG2(TICK_TIMER_COUNT_VALUE)-1:0] tick_counter = 0;
-  reg [`REG_TIMER_WIDTH-1:0] timer = 0;
+  reg [`REG_TIMER_WIDTH-1:0] counter = 0;
+  reg [`CLOG2(MAX_VALUE)-1:0] sub_counter = 0;
 
   /*
    * Detect when start is initially set, use it to reset the timer value back
@@ -64,25 +62,25 @@ module timer #(
     .edge_detected(start_pulse)
   );
 
-  always @(posedge clk)
-    if (start)
-      if (tick_pulse)
-        tick_counter <= 0;
-      else
-        tick_counter <= tick_counter + 1;
-
   /*
    * Timer gets set to init upon overflow
    */
-  always @(posedge clk)
-    if (start_pulse)
-      timer <= init;
-    else if (tick_pulse)
-      if (timer == 2**`REG_TIMER_WIDTH - 1)
-        timer <= init;
-      else
-        timer <= timer + 1;
+  always @(posedge clk) begin
+    overflow <= 0;
 
-  assign tick_pulse = tick_counter == TICK_TIMER_COUNT_VALUE - 1;
-  assign overflow = timer == 2**`REG_TIMER_WIDTH - 1;
+    if (start_pulse) begin
+      counter <= init;
+      sub_counter <= MAX_VALUE - 1;
+    end else if (start) begin
+      sub_counter <= sub_counter - 1;
+      if (!sub_counter) begin
+        sub_counter <= MAX_VALUE - 1;
+        counter <= counter + 1;
+        if (&counter) begin
+          overflow <= 1;
+          counter <= init;
+        end
+      end
+    end
+  end
 endmodule
